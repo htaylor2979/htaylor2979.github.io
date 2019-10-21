@@ -1,2 +1,2 @@
 # htaylor2979.github.io
-Data Science Portfolio
+Student's t and Coffee: A Machine Learning and Data Visualization Portfolio
