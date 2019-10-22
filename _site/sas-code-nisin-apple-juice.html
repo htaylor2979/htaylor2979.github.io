@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Predicting Bacterial Spores Growth with Logistic Regression in SAS | Student’s t and Coffee</title>
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="Predicting Bacterial Spores Growth with Logistic Regression in SAS" />
+<meta name="author" content="Hellen Taylor" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Introduction" />
+<meta property="og:description" content="Introduction" />
+<link rel="canonical" href="http://localhost:4000/sas-code-nisin-apple-juice" />
+<meta property="og:url" content="http://localhost:4000/sas-code-nisin-apple-juice" />
+<meta property="og:site_name" content="Student’s t and Coffee" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-10-21T00:00:00-04:00" />
+<script type="application/ld+json">
+{"dateModified":"2019-10-21T00:00:00-04:00","datePublished":"2019-10-21T00:00:00-04:00","url":"http://localhost:4000/sas-code-nisin-apple-juice","headline":"Predicting Bacterial Spores Growth with Logistic Regression in SAS","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/sas-code-nisin-apple-juice"},"author":{"@type":"Person","name":"Hellen Taylor"},"description":"Introduction","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Student's t and Coffee" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Student&#39;s t and Coffee</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Predicting Bacterial Spores Growth with Logistic Regression in SAS</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-10-21T00:00:00-04:00" itemprop="datePublished">Oct 21, 2019
+      </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Hellen Taylor</span></span></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="introduction">Introduction</h1>
+
+<p>One of my class projects in Fall 2018 was to model the growth of bacterial spores called  <i>Alicyclobacillus acidoterrestris</i> CRA7152 in pasteurized apple juice. This particular bacterial strain is responsible for the “off” taste that develops in refrigerated fruit juices like those sold in cold cases at grocery stores. Though harmless, CRA7152 causes grocery stores to loose money by shortening products’ shelf life, and its spores are resistant to the heat of pasteurization.</p>
+
+<p>Furtunately, a chemical called nisin reduces CRA7152’s heat resistance so that more of the spores die when heated. Thus, my modeling goal was predict whether spores would grow in pasteurized apple juice based on the following features:</p>
+<ul>
+	<li>nisin (units were not provided with the dataset, but typical units would be IU nisin/ml of solution)</li>
+	<li>pH of the apple juice</li>
+	<li>temperature of pasteurization in degrees Celcius</li>
+	<li>Brix, which is a measure of percent-weight of sugar solutions</li>
+</ul>
+
+<p>Because the response variable was binary (1 = growth of CRA7152 spores), I used logistic regression to predict the probability of a positive outcome.</p>
+
+<h3 id="sas-code-used-in-exploring-the-data">SAS code used in exploring the data</h3>
+<p>I wrote the following SAS code to explore the model features. The project was graded, in part, on our thoroughness of characterizing the data before modeling.</p>
+
+<p>Table 1 summarizes the descriptive stats that were generated by the “Introduce the Data” section of code.</p>
+
+<p><img src="http://localhost:4000/assets/img/nisin-apple-juice-dataset-stats-fewer-dec.jpg" alt="Table 1 Summary Stats" /></p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby">	<span class="n">libname</span> <span class="n">wk6</span> <span class="s2">"/folders/myfolders/"</span> <span class="p">;</span>
+
+	<span class="sr">/***** Introduce the Data *****/</span>
+
+	<span class="o">*</span> <span class="no">Check</span> <span class="n">the</span> <span class="n">dataset</span> <span class="n">file</span> <span class="n">contents</span> <span class="p">;</span>
+	<span class="nb">proc</span> <span class="n">contents</span> <span class="n">data</span><span class="o">=</span><span class="n">wk6</span><span class="p">.</span><span class="nf">apple_juice</span> <span class="p">;</span>
+		<span class="n">label</span> <span class="p">;</span>
+	<span class="n">run</span> <span class="p">;</span>
+
+	<span class="nb">proc</span> <span class="n">freq</span> <span class="n">data</span><span class="o">=</span><span class="n">wk6</span><span class="p">.</span><span class="nf">apple_juice</span> <span class="p">;</span>
+	<span class="n">run</span> <span class="p">;</span>
+
+	<span class="o">*</span> <span class="no">Generate</span> <span class="n">descriptive</span> <span class="n">stats</span> <span class="p">;</span>
+	<span class="n">ods</span> <span class="n">graphics</span> <span class="n">on</span><span class="p">;</span>
+	<span class="nb">proc</span> <span class="n">univariate</span> <span class="n">data</span> <span class="o">=</span> <span class="n">wk6</span><span class="p">.</span><span class="nf">apple_juice</span> 
+		<span class="n">outtable</span> <span class="o">=</span> <span class="n">applej_stats</span>  
+		<span class="n">noprint</span>	<span class="p">;</span>
+	<span class="n">run</span><span class="p">;</span>
+
+	<span class="o">*</span> <span class="no">Print</span> <span class="n">a</span> <span class="n">short</span> <span class="n">table</span> <span class="n">of</span> <span class="n">descriptive</span> <span class="n">stats</span> <span class="p">;</span>
+	<span class="n">title</span> <span class="s2">"Descriptive Stats for the Apple Juice Dataset"</span> <span class="p">;</span>
+	<span class="nb">proc</span> <span class="nb">print</span> <span class="n">data</span> <span class="o">=</span> <span class="n">applej_stats</span>
+		<span class="n">noobs</span> <span class="n">label</span> <span class="p">;</span>
+		<span class="n">var</span> <span class="n">_VAR_</span> <span class="n">_NOBS_</span> <span class="n">_MIN_</span> <span class="n">_MEDIAN_</span> <span class="n">_MEAN_</span> <span class="n">_MAX_</span> <span class="n">_SKEW_</span> <span class="n">_NMISS_</span> <span class="p">;</span>
+		<span class="n">label</span> 
+			<span class="n">_MIN_</span><span class="o">=</span><span class="s2">"Minimum"</span> 
+			<span class="n">_MAX_</span><span class="o">=</span><span class="s2">"Maximum"</span> 
+			<span class="n">_MEAN_</span><span class="o">=</span><span class="s2">"Mean"</span> 
+			<span class="n">_MEDIAN_</span><span class="o">=</span><span class="s2">"Median"</span> 
+			<span class="n">_SKEW_</span> <span class="o">=</span> <span class="s2">"Skew"</span>
+			<span class="n">_NMISS_</span><span class="o">=</span><span class="s2">"# of Missing Values"</span> <span class="p">;</span>
+	<span class="n">run</span> <span class="p">;</span>
+	</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby">	<span class="sr">/***** Investigate Each Predictor *****/</span>
+
+	<span class="sr">/* Run Proc Logistic on the four predictors, one at a time. 
+	* Implement a macro to save coding */</span>
+
+	<span class="o">%</span><span class="n">macro</span> <span class="n">testgrowth</span><span class="p">(</span><span class="n">my_vars</span> <span class="o">=</span><span class="p">,</span> <span class="n">plots_wanted</span> <span class="o">=</span><span class="p">,</span>  <span class="p">)</span> <span class="p">;</span>
+		<span class="n">title</span> <span class="s2">"Proc Logistic Output for Variable(s): &amp;my_vars"</span> <span class="p">;</span>
+		<span class="n">ods</span> <span class="n">graphics</span> <span class="n">on</span> <span class="p">;</span>
+		<span class="nb">proc</span> <span class="n">logistic</span> <span class="n">data</span><span class="o">=</span><span class="n">wk6</span><span class="p">.</span><span class="nf">apple_juice</span>
+			<span class="n">plots</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">plots_wanted</span><span class="o">.</span> <span class="p">;</span>
+			<span class="n">model</span> <span class="n">growth</span> <span class="p">(</span><span class="n">event</span><span class="o">=</span><span class="s1">'1'</span><span class="p">)</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">my_vars</span><span class="o">.</span> <span class="p">;</span>
+		<span class="n">run</span> <span class="p">;</span>
+	<span class="o">%</span><span class="n">mend</span> <span class="p">;</span>
+
+	<span class="sr">/* Input: plots_wanted can be none, all, a list, or just one plot */</span>
+	<span class="o">%</span><span class="n">testgrowth</span><span class="p">(</span><span class="n">my_vars</span> <span class="o">=</span> <span class="n">ph</span><span class="p">,</span> <span class="n">plots_wanted</span> <span class="o">=</span> <span class="no">ROC</span><span class="p">)</span> <span class="p">;</span>
+	<span class="o">%</span><span class="n">testgrowth</span><span class="p">(</span><span class="n">my_vars</span> <span class="o">=</span> <span class="n">nisin</span><span class="p">,</span> <span class="n">plots_wanted</span> <span class="o">=</span> <span class="no">ROC</span><span class="p">)</span> <span class="p">;</span>
+	<span class="o">%</span><span class="n">testgrowth</span><span class="p">(</span><span class="n">my_vars</span> <span class="o">=</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">plots_wanted</span> <span class="o">=</span> <span class="no">ROC</span><span class="p">)</span> <span class="p">;</span>
+	<span class="o">%</span><span class="n">testgrowth</span><span class="p">(</span><span class="n">my_vars</span> <span class="o">=</span> <span class="n">brix</span><span class="p">,</span> <span class="n">plots_wanted</span> <span class="o">=</span> <span class="no">ROC</span><span class="p">)</span> <span class="p">;</span>
+	<span class="o">*</span> <span class="o">%</span><span class="n">testgrowth</span><span class="p">(</span><span class="n">my_vars</span> <span class="o">=</span> <span class="n">ph</span> <span class="n">nisin</span> <span class="n">temperature</span> <span class="n">brix</span><span class="p">,</span> <span class="n">plots_wanted</span> <span class="o">=</span> <span class="no">ROC</span><span class="p">)</span> <span class="p">;</span>
+
+	<span class="sr">/* The model with all the variables gets its own code because 
+	*  the selection method was specified in the homework instructions. */</span>
+	<span class="n">title</span> <span class="s2">"Proc Logistic Output for All Variables with Stepwise Selection Method"</span> <span class="p">;</span>
+	<span class="n">ods</span> <span class="n">graphics</span> <span class="n">on</span> <span class="p">;</span>
+	<span class="nb">proc</span> <span class="n">logistic</span> <span class="n">data</span><span class="o">=</span><span class="n">wk6</span><span class="p">.</span><span class="nf">apple_juice</span>
+		<span class="n">plots</span> <span class="o">=</span> <span class="no">ROC</span> <span class="p">;</span>
+		<span class="n">model</span> <span class="n">growth</span> <span class="p">(</span><span class="n">event</span><span class="o">=</span><span class="s1">'1'</span><span class="p">)</span> <span class="o">=</span> <span class="n">ph</span> <span class="n">nisin</span> <span class="n">temperature</span> <span class="n">brix</span>
+			<span class="sr">/selection=stepwise;
+	run ;
+	</span></code></pre></figure>
+
+
+  </div><a class="u-url" href="/sas-code-nisin-apple-juice" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Student&#39;s t and Coffee</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Student&#39;s t and Coffee</li><li><a class="u-email" href="mailto:htaylor2979@gmail.com">htaylor2979@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/htaylor2979"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">htaylor2979</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

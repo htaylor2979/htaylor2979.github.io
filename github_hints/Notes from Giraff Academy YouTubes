@@ -1,0 +1,32 @@
+Jekyll Notes:
+bundle exec jekyll serve
+
+
+Front Matter:
+
+
+--- 
+layout: post (or page or other custom layout)
+permalink: /about/ (for example)
+date:
+title:
+author:
+---
+
+
+Drafts:
+_drafts folder saves drafts
+
+To render drafts in markdown, use command line: jekyll serve --draft  (tells Jekyll to serve drafts, no ignore them)
+
+
+Custom Layouts:
+--> Place layouts in the _layouts folder
+ 
+	Naming Conventrions: layoutname.html
+	
+	Variables for templates:
+	{{ content }} --> placeholder of content in the blog post
+	{{ layout.author }} --> the author name defined in the front matter of the layout templates
+	{{ page.title }} --> references the title variable as defined in the specific page's front matter
+	{{ site.title }} --> 'site' tells jekyll to look in the _config.yml file
