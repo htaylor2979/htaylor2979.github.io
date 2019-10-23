@@ -3,9 +3,9 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Predicting Bacterial Spores Growth with Logistic Regression in SAS | Student’s “t” and Coffee</title>
+<title>Predicting Survival of Bacterial Spores Using Logistic Regression in SAS | Student’s “t” and Coffee</title>
 <meta name="generator" content="Jekyll v3.8.6" />
-<meta property="og:title" content="Predicting Bacterial Spores Growth with Logistic Regression in SAS" />
+<meta property="og:title" content="Predicting Survival of Bacterial Spores Using Logistic Regression in SAS" />
 <meta name="author" content="Hellen Taylor" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Introduction" />
@@ -16,7 +16,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-10-21T00:00:00-04:00" />
 <script type="application/ld+json">
-{"url":"http://localhost:4000/sas-code-nisin-apple-juice","author":{"@type":"Person","name":"Hellen Taylor"},"headline":"Predicting Bacterial Spores Growth with Logistic Regression in SAS","description":"Introduction","datePublished":"2019-10-21T00:00:00-04:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/sas-code-nisin-apple-juice"},"@type":"BlogPosting","dateModified":"2019-10-21T00:00:00-04:00","@context":"https://schema.org"}</script>
+{"url":"http://localhost:4000/sas-code-nisin-apple-juice","author":{"@type":"Person","name":"Hellen Taylor"},"headline":"Predicting Survival of Bacterial Spores Using Logistic Regression in SAS","description":"Introduction","datePublished":"2019-10-21T00:00:00-04:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/sas-code-nisin-apple-juice"},"@type":"BlogPosting","dateModified":"2019-10-21T00:00:00-04:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Student's "t" and Coffee" /></head>
 <body><header class="site-header" role="banner">
@@ -39,7 +39,7 @@
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Predicting Bacterial Spores Growth with Logistic Regression in SAS</h1>
+    <h1 class="post-title p-name" itemprop="name headline">Predicting Survival of Bacterial Spores Using Logistic Regression in SAS</h1>
     <p class="post-meta">
       <time class="dt-published" datetime="2019-10-21T00:00:00-04:00" itemprop="datePublished">Oct 21, 2019
       </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Hellen Taylor</span></span></p>
@@ -48,22 +48,20 @@
   <div class="post-content e-content" itemprop="articleBody">
     <h1 id="introduction">Introduction</h1>
 
-<p>One of my class projects in Fall 2018 was to model the growth of bacterial spores called  <i>Alicyclobacillus acidoterrestris</i> CRA7152 in pasteurized apple juice. This particular bacterial strain is responsible for the “off” taste that develops in refrigerated fruit juices like those sold in cold cases at grocery stores. Though harmless, CRA7152 causes grocery stores to loose money by shortening products’ shelf life, and its spores are resistant to the heat of pasteurization.</p>
+<p>One of my class projects in Fall 2018 was to predict the presence of live bacterial spores called  <i>Alicyclobacillus acidoterrestris</i> CRA7152 in pasteurized apple juice. This particular bacterial strain is resistant to the heat of pasteurization, and it is also responsible for the “off” taste that develops in refrigerated fruit juices, like those sold in cold cases at grocery stores. Though harmless, CRA7152 causes stores to loose money by shortening products’ shelf life.</p>
 
-<p>Furtunately, a chemical called nisin reduces CRA7152’s heat resistance so that more of the spores die when heated. Thus, my modeling goal was predict whether spores would grow in pasteurized apple juice based on the following features:</p>
+<p>Furtunately, a chemical called nisin reduces CRA7152’s heat resistance so that more of the spores die when heated. Thus, my modeling goal was to use the following features to predict whether live spores would be found in the pasteurized juice:</p>
 <ul>
 	<li>nisin (units were not provided with the dataset, but typical units would be IU nisin/ml of solution)</li>
 	<li>pH of the apple juice</li>
 	<li>temperature of pasteurization in degrees Celcius</li>
-	<li>Brix, which is a measure of percent-weight of sugar solutions</li>
+	<li>Brix, which is a measure of percent by weight of sugar solutions</li>
 </ul>
 
-<p>Because the response variable was binary (1 = growth of CRA7152 spores), I used logistic regression to predict the probability of a positive outcome.</p>
+<p>Because the response variable was binary (where 1 = detection of live CRA7152 spores), I chose logistic regression to predict the probability that the spores would survive the heating process.</p>
 
 <h3 id="sas-code-used-in-exploring-the-data">SAS code used in exploring the data</h3>
-<p>I wrote the following SAS code to explore the model features. The project was graded, in part, on our thoroughness of characterizing the data before modeling.</p>
-
-<p>Table 1 summarizes the descriptive stats that were generated by the “Introduce the Data” section of code.</p>
+<p>I wrote the following SAS code to explore the model features. Table 1 summarizes the descriptive stats that were generated by the “Introduce the Data” section of code.</p>
 
 <p><img src="http://localhost:4000/assets/img/nisin-apple-juice-dataset-stats-fewer-dec.jpg" alt="Table 1 Summary Stats" /></p>
 
@@ -101,6 +99,9 @@
 	<span class="n">run</span> <span class="p">;</span>
 	</code></pre></figure>
 
+<h3 id="logistic-regression-model">Logistic regression model</h3>
+<p>The project instructions directed us to fit five models. The first four used only one feature each, while the fifth model used all four features. To make my code more efficient, I create a macro for the modeling process and then passed in each of the four predictors as parameters. The instructions for the fifth model dictated a stepwise variable selection approach. Thus, the fifth model was given its own section of code.</p>
+
 <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby">	<span class="sr">/***** Investigate Each Predictor *****/</span>
 
 	<span class="sr">/* Run Proc Logistic on the four predictors, one at a time. 
@@ -132,6 +133,14 @@
 			<span class="sr">/selection=stepwise;
 	run ;
 	</span></code></pre></figure>
+
+<h3 id="the-fifth-and-final-model">The fifth and final model</h3>
+<p>A receiver operating characteristic (ROC) curve was printed for each model to determine how well it predicted the spores’ survival. Among these, the first four models showed a noticeably smaller area under curve (AUC). Given that a larger AUC indicates an overall better true positive rate vs. false positive rate, the fifth model performed the best. Its ROC curve is pictured below.</p>
+
+<p><img src="http://localhost:4000/assets/img/roc-curve-nisin-apple-juice-model-all-predictors.jpg" alt="ROC of the final model" /></p>
+
+<h3 id="the-equation-of-the-final-model">The equation of the final model</h3>
+<p>P(presence of live spores) = -7.2462 + 1.8859 * ph - 0.0663 * nisin + 0.1104 * temperature - 0.3117 * brix</p>
 
 
   </div><a class="u-url" href="/sas-code-nisin-apple-juice" hidden></a>
