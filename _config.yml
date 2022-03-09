@@ -23,7 +23,7 @@ baseurl:
 url: https://htaylor2979.github.io
 github_username: htaylor2979
 markdown: kramdown
-theme: minima
+remote_theme: "mmistakes/minimal-mistakes@4.24.0"
 plugins:
 - jekyll-feed
 exclude:
