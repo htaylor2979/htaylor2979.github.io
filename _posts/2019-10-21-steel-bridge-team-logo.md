@@ -1,7 +1,10 @@
 ---
 title: Steel Bridge Team Logo - Spring 2012
-categories: "creative works"
+date: 2019-10-21 00:00:00 Z
 permalink: steel-bridge-design-team-logo
+categories:
+- creative
+- works
 ---
 
 In Spring 2012, I participated for the second time in the annual Carolinas Conference for civil engineering students. Our NCSU team had no official T-shirt, and I volunteered to design something cool. The wolf silhoutte is based on a larger bit of clip art I found and heavily modified by clipping the wolf away from its background and changing the color to black. The typography, on the other hand, is entirely my work. The beam with our school name was inspired by the truss design that our team used to reduce the bridge's total weight. 

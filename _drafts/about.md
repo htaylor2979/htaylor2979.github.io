@@ -1,7 +1,8 @@
 ---
-layout: page
 title: About
-permalink: /about/
+date: 2022-03-09 13:59:19.235000000 Z
+permalink: "/about/"
+layout: page
 ---
 
 This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)

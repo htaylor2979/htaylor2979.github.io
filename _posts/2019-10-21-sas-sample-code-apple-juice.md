@@ -1,10 +1,13 @@
 ---
-author: Hellen Taylor
 title: Predicting Survival of Bacterial Spores Using Logistic Regression in SAS
-categories: sas
-layout: post
+date: 2019-10-21 00:00:00 Z
 permalink: sas-code-nisin-apple-juice
+categories:
+- sas
+author: Hellen Taylor
+layout: post
 ---
+
 # Introduction
 
 One of my class projects in Fall 2018 was to predict the presence of live bacterial spores called  <i>Alicyclobacillus acidoterrestris</i> CRA7152 in pasteurized apple juice. This particular bacterial strain is resistant to the heat of pasteurization, and it is also responsible for the "off" taste that develops in refrigerated fruit juices, like those sold in cold cases at grocery stores. Though harmless, CRA7152 causes stores to loose money by shortening products' shelf life. 
