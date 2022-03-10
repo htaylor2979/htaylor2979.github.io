@@ -16,14 +16,27 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap');
 
-$serif              : "PT Serif", Georgia, Times, serif;
-$sans-serif-narrow  : "Tenor Sans", -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
+@import "minimal-mistakes"; // main partials
 
-$global-font-family : $serif;
-$header-font-family : $sans-serif-narrow;
+/* system typefaces */
+$serif: Georgia, Times, serif !default;
+$sans-serif: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI",
+  "Helvetica Neue", "Lucida Grande", Arial, sans-serif !default;
+$monospace: Monaco, Consolas, "Lucida Console", monospace !default;
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 2em 0 0.5em;
+  line-height: 1.2;
+  font-family: $header-font-family;
+  font-weight: regular;
+}
 
-/* $sans-serif: "Tenor Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
-
-/* Other formatting */
-$paragraph-indent: true;
+/* paragraph indention */
+$paragraph-indent: true !default; // true, false (default)
+$indent-var: 1.3em !default;
