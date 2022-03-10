@@ -7,7 +7,6 @@ categories:
 layout: post
 ---
 
-
 One of my class projects in Fall 2018 was to predict the presence of live bacterial spores called  <i>Alicyclobacillus acidoterrestris</i> CRA7152 in pasteurized apple juice. This particular bacterial strain is resistant to the heat of pasteurization, and it is also responsible for the "off" taste that develops in refrigerated fruit juices, like those sold in cold cases at grocery stores. Though harmless, CRA7152 causes stores to loose money by shortening products' shelf life. 
 
 Furtunately, a chemical called nisin reduces CRA7152's heat resistance so that more of the spores die when heated. Thus, my modeling goal was to use the following features to predict whether live spores would be found in the pasteurized juice:
