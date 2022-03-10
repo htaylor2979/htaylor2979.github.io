@@ -1,8 +1,4 @@
 # Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
 title: Data Science Portfolio
 timezone: America/New_York
 collections:
@@ -17,12 +13,8 @@ collections:
 email: htaylor2979@gmail.com
 github_username: htaylor2979
 
-# >-  this means to ignore newlines until "baseurl:" 
-description: >- 
-  You have found the portfolio of Hellen Taylor. I am a detail-oriented,
-  analytical problem solver with academic experience in data 
-  visualization and SQL and real-world experience in 
-  cleaning retail product data from multiple suppliers.
+# Description of site" 
+description: You have found the portfolio of Hellen Taylor. I am a detail-oriented, analytical problem solver with academic experience in data   visualization and SQL and real-world experience in cleaning retail product data from multiple suppliers.
 
 baseurl: 
 url: https://htaylor2979.github.io
