@@ -26,5 +26,6 @@ plugins:
   - jekyll-include-cache
   - jekyll-data
   - jekyll-remote_theme
+  - jekyll-include-cache
 exclude:
 - drafts
