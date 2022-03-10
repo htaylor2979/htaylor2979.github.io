@@ -1,6 +1,13 @@
 ---
 title: Data Science Portfolio
 timezone: America/New_York
+collections:
+  posts:
+    title: Posts
+    output: true
+  uploads:
+    title: Uploads
+    output: true
 email: htaylor2979@gmail.com
 description: You have found the portfolio of Hellen Taylor. I am a detail-oriented,
   analytical problem solver with academic experience in data visualization and SQL
