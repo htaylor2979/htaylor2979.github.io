@@ -4,7 +4,6 @@ date: 2019-10-20 20:00:00 -04:00
 permalink: sas-code-nisin-apple-juice
 categories:
 - sas
-author: Hellen Taylor
 layout: post
 ---
 
