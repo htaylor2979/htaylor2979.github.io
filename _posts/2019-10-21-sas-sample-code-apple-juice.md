@@ -5,7 +5,7 @@ permalink: sas-code-nisin-apple-juice
 categories:
 - sas
 author: Hellen Taylor
-layout: post
+layout: default
 ---
 
 # Introduction
