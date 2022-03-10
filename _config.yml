@@ -25,6 +25,5 @@ plugins:
 - jemoji
 - jekyll-data
 - jekyll-remote_theme
-- jekyll-include-cache
 exclude:
 - drafts
