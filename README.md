@@ -1,2 +1,2 @@
 # htaylor2979.github.io
-Student's t and Coffee: A Machine Learning and Data Visualization Portfolio
+Hellen Taylor's Machine Learning and Data Visualization Portfolio
