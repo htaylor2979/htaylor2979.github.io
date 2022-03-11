@@ -14,14 +14,11 @@ description: You have found the portfolio of Hellen Taylor. I am a detail-orient
   and real-world experience in cleaning retail product data from multiple suppliers.
 baseurl: 
 url: https://htaylor2979.github.io
-# Author Settings
-author: Hellen Taylor # add your name
-author-img: hellen-taylor-profile-photo.jpg # add your photo
-#about-author: I am  # add description
-social-github: htaylor2979 # add your Github handle
-social-linkedin: htaylor2979 # add your Linkedin handle
-social-email: htaylor2979@gmail.com # add your Email address
-#github_username: htaylor2979
+author: Hellen Taylor
+author-img: hellen-taylor-profile-photo.jpg
+social-github: htaylor2979
+social-linkedin: htaylor2979
+social-email: htaylor2979@gmail.com
 markdown: kramdown
 remote_theme: artemsheludko/flexible-jekyll
 plugins:
