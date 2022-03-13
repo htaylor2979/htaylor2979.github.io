@@ -13,17 +13,21 @@ layout: default
     </div>
     <div class="pages-list">
       {% for page in site.pages %}
-        <div class="page-title><a href="{{page.url}}">{{page.title}}</a></div>
+        <div class="page-title>
+          <a href="{{page.url}}">{{page.title}}</a>
+        </div>
       {% endfor %}
     </div>
     <div class="categories-list">
       {% for category in site.categories %}
-        <div class="category-title"><a href="{{category.url}}>{{category.title}}</a></div>
+        <div class="category-title">
+          <a href="{{category.url}}">{{category}}</a>
+        </div>
       {% endfor %}
     </div>
     <div class="tags-list">
       {% for tag in site.tags %}
-        <a href="{{tag.url}}">{{tag.title}}</a>
+        <a href="{{tag.url}}">{{tag}}</a>
       {% endfor %}
     </div>
     
