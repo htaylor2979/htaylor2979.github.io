@@ -12,7 +12,9 @@ layout: default
       <p>{{site.about-author}}</p>
     </div>
     <div class="pages-list">
-      {{site.pages}}
+      {% for page in site.pages %}
+        <a href="{{page.url}}">{{page.title}}</a>
+      {% endif %}
     </div>
     <div class="categories-list">
       {{site.categories}}
