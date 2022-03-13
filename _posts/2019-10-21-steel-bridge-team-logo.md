@@ -5,6 +5,8 @@ permalink: steel-bridge-design-team-logo
 categories:
 - creative
 - works
+tags:
+- graphic design
 layout: post
 ---
 
