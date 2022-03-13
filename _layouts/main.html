@@ -18,13 +18,13 @@ layout: default
     </div>
     <div class="categories-list">
       {% for category in site.categories %}
-        <div class="category-title"><a href="{{category.url}}">{{category}}</a></div>
+        <div class="category-title"><a href="{{category.url}}">{{category.name}}</a></div>
       {% endfor %}
     </div>
     <div class="tags-list">
       {{site.tags}}
       {% for tag in site.tags %}
-        <a href="{{tag.url}}">{{tag}}</a>
+        <a href="{{tag.url}}">{{tag.name}}</a>
       {% endfor %}
     </div>
     
