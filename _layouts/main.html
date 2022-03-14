@@ -12,9 +12,15 @@ layout: default
       <p>{{site.about-author}}</p>
     </div>
     <div class="nav">
-      {% if page.title == "Categories" %}<p><a href="{{site.baseurl}}/">Recent Posts</a></p>
-      {% else %}<p><a href="{{site.baseurl}}/categories">Projects by Category</a></p>
-      {% endif %}
+      <p>
+        <div class="nav-items">
+          <ul>
+            {% if page.title == "Categories" %}<li><a href="{{site.baseurl}}/">Recent Posts</a></li>
+            {% else %}<p><a href="{{site.baseurl}}/categories">Projects by Category</a></p>
+            {% endif %}
+          </ul>
+        </div>
+      </p>
     </div>
   </header> <!-- End Header -->
   <footer>

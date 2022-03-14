@@ -999,7 +999,7 @@ table tfoot td {
   font-size: 16px;
   margin: 0 0 10px;
 }
-
+ /* - - - Nav Bar (Added to Original Theme File - - - */
 .nav {
   margin: 0 0 20px;
   text-align: center;
@@ -1016,6 +1016,45 @@ table tfoot td {
   color: #333030;
   font-weight: 300;
 }
+
+.nav-items {
+  margin: 0;
+  padding: 10px;
+}
+
+.nav-items li {
+  display: inline-block;
+  margin: 5px;
+  list-style: none;
+}
+
+.nav-items li a {
+  text-decoration: none;
+  color: #263959;
+  display: inline-block;
+  padding: 5px 10px;
+  border: 1px solid #ecf0f1;
+  background-color: #fafafa;
+  -webkit-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+}
+
+.nav-items li a:hover {
+  background-color: #ecf0f1;
+}
+
+.nav-items-list span a {
+  text-decoration: none;
+  color: #263959;
+}
+
+.nav-items-list span a:hover {
+  text-decoration: underline;
+  opacity: .8;
+}
+
+
 
 .content-box {
   padding: 20px;
