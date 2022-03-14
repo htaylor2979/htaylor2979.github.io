@@ -1378,6 +1378,13 @@ img + em {
   color: #0077B6;
 }
 
+em + img {
+  text-decoration: italic;
+  font-weight: 400;
+  font-size: 1.2em;
+  color: #0077B6;
+}
+
 /* - - - - - - - - - - Tag Styles - - - - - - - - - - */
 .blog-tags {
   width: 100%;
