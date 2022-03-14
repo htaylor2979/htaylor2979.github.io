@@ -30,6 +30,6 @@ The first use of the Iris dataset is credited to Sir R.A. Fisher, and the data h
 * versicolor
 * virginica
 
-![Steel Bridge Team Logo - Spring 2012]({{ site.url }}/assets/img/steel-bridge-design-team-logo.jpg)
+![Steel Bridge Team Logo - Spring 2012]({{ site.url }}/assets/img/pairplot-iris-features.jpg)
 
 
