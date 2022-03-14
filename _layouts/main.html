@@ -11,26 +11,6 @@ layout: default
       <div class="author-name">{{site.author}}</div>
       <p>{{site.about-author}}</p>
     </div>
-    <div class="pages-list">
-      {% for page in site.pages %}
-        <div class="page-title">
-          <a href="{{page[0] | slugify}}" >{{page.title}}</a>
-        </div>
-      {% endfor %}
-    </div>
-    <div class="categories-list">
-      {% for category in site.categories %}
-        <div class="category-title">
-          <a href="{{category[0] | slugify}}">{{category[0]}}</a>
-        </div>
-      {% endfor %}
-    </div>
-    <div class="tags-list">
-      {% for tag in site.tags %}
-        <a href="{{tag[0] | slugify}}">{{tag[0]}}</a>
-      {% endfor %}
-    </div>
-    
   </header> <!-- End Header -->
   <footer>
     <section class="contact">
