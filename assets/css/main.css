@@ -1218,14 +1218,14 @@ footer .copyright {
 
 .post .post-content .post-title {
   margin: 0 0 10px;
-  font-size: 30px;
+  font-size: 24px;
   font-weight: 400;
 }
 
 .post .post-content .post-title a {
   font-family: 'Tenor Sans', 'Trebuchet MS', 'Helvetica', sans-serif;
   text-decoration: none;
-  color: #263959;
+  color: #023E8A; /* Original theme #263959 */
 }
 
 .post .post-content p {
@@ -1433,7 +1433,7 @@ a.newer-posts:hover {
 
 .blog-cats h1 {
   font-size: 24px;
-  text-align: left;
+  text-align: center;
   line-height: 1.3;
   color: #0077B6;
   border: bottom 2px;
