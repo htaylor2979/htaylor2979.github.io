@@ -22,7 +22,9 @@ social-github: htaylor2979
 social-linkedin: htaylor2979
 social-email: htaylor2979@gmail.com
 markdown: kramdown
-highlighter: " rouge"
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
 remote_theme: artemsheludko/flexible-jekyll
 plugins:
 - jekyll-paginate
