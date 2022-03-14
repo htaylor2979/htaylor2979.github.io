@@ -28,10 +28,6 @@ kramdown:
   syntax_highlighter_opts:
     default_lang: python
     css_class: highlight
-    span:
-      line_numbers: false
-    block:
-      line_numbers: true
 remote_theme: artemsheludko/flexible-jekyll
 plugins:
 - jekyll-paginate
