@@ -1000,6 +1000,11 @@ table tfoot td {
   margin: 0 0 10px;
 }
 
+.nav {
+  margin: 0 0 20px;
+  text-align: center;
+  top: 20px;
+}
 
 .nav .category-list {
   font-family: 'Tenor Sans', 'Trebuchet MS', 'Helvetica', sans-serif;
@@ -1019,7 +1024,7 @@ table tfoot td {
   -webkit-transform: translateX(-50%);
       -ms-transform: translateX(-50%);
           transform: translateX(-50%);
-  bottom: 0;
+  top: 10px;
   display: block;
   width: 7px;
   height: 7px;
