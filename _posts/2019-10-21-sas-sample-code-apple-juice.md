@@ -25,76 +25,75 @@ I wrote the following SAS code to explore the model features. Table 1 summarizes
 
  ![Table 1 Summary Stats]({{ site.url }}/assets/img/nisin-apple-juice-dataset-stats-fewer-dec.jpg)
 
-```python
-	libname wk6 "/folders/myfolders/" ;
+{% highlight sas %}
+libname wk6 "/folders/myfolders/" ;
 
-	/***** Introduce the Data *****/
+/***** Introduce the Data *****/
 
-	* Check the dataset file contents ;
-	proc contents data=wk6.apple_juice ;
-		label ;
-	run ;
+* Check the dataset file contents ;
+proc contents data=wk6.apple_juice ;
+	label ;
+run ;
 
-	proc freq data=wk6.apple_juice ;
-	run ;
+proc freq data=wk6.apple_juice ;
+run ;
 
-	* Generate descriptive stats ;
-	ods graphics on;
-	proc univariate data = wk6.apple_juice 
-		outtable = applej_stats  
-		noprint	;
-	run;
+* Generate descriptive stats ;
+ods graphics on;
+proc univariate data = wk6.apple_juice 
+	outtable = applej_stats  
+	noprint	;
+run;
 
-	* Print a short table of descriptive stats ;
-	title "Descriptive Stats for the Apple Juice Dataset" ;
-	proc print data = applej_stats
-		noobs label ;
-		var _VAR_ _NOBS_ _MIN_ _MEDIAN_ _MEAN_ _MAX_ _SKEW_ _NMISS_ ;
-		label 
-			_MIN_="Minimum" 
-			_MAX_="Maximum" 
-			_MEAN_="Mean" 
-			_MEDIAN_="Median" 
-			_SKEW_ = "Skew"
-			_NMISS_="# of Missing Values" ;
-	run ;
-	
-```
+* Print a short table of descriptive stats ;
+title "Descriptive Stats for the Apple Juice Dataset" ;
+proc print data = applej_stats
+	noobs label ;
+	var _VAR_ _NOBS_ _MIN_ _MEDIAN_ _MEAN_ _MAX_ _SKEW_ _NMISS_ ;
+	label 
+		_MIN_="Minimum" 
+		_MAX_="Maximum" 
+		_MEAN_="Mean" 
+		_MEDIAN_="Median" 
+		_SKEW_ = "Skew"
+		_NMISS_="# of Missing Values" ;
+run ;
+{% endhighlight %}
 
 ### Logistic regression model
 The project instructions directed us to fit five models. The first four used only one feature each, while the fifth model used all four features. To make my code more efficient, I create a macro for the modeling process and then passed in each of the four predictors as parameters. The instructions for the fifth model dictated a stepwise variable selection approach. Thus, the fifth model was given its own section of code. 
 
-{% highlight python %}
-	/***** Investigate Each Predictor *****/
+{% highlight sas %}
+/***** Investigate Each Predictor *****/
 
-	/* Run Proc Logistic on the four predictors, one at a time. 
-	* Implement a macro to save coding */
+/* Run Proc Logistic on the four predictors, one at a time. 
+* Implement a macro to save coding */
 
-	%macro testgrowth(my_vars =, plots_wanted =,  ) ;
-		title "Proc Logistic Output for Variable(s): &my_vars" ;
-		ods graphics on ;
-		proc logistic data=wk6.apple_juice
-			plots = &plots_wanted. ;
-			model growth (event='1') = &my_vars. ;
-		run ;
-	%mend ;
-
-	/* Input: plots_wanted can be none, all, a list, or just one plot */
-	%testgrowth(my_vars = ph, plots_wanted = ROC) ;
-	%testgrowth(my_vars = nisin, plots_wanted = ROC) ;
-	%testgrowth(my_vars = temperature, plots_wanted = ROC) ;
-	%testgrowth(my_vars = brix, plots_wanted = ROC) ;
-	* %testgrowth(my_vars = ph nisin temperature brix, plots_wanted = ROC) ;
-
-	/* The model with all the variables gets its own code because 
-	*  the selection method was specified in the homework instructions. */
-	title "Proc Logistic Output for All Variables with Stepwise Selection Method" ;
+%macro testgrowth(my_vars =, plots_wanted =,  ) ;
+	title "Proc Logistic Output for Variable(s): &my_vars" ;
 	ods graphics on ;
 	proc logistic data=wk6.apple_juice
-		plots = ROC ;
-		model growth (event='1') = ph nisin temperature brix
-			/selection=stepwise;
+		plots = &plots_wanted. ;
+		model growth (event='1') = &my_vars. ;
 	run ;
+%mend ;
+
+/* Input: plots_wanted can be none, all, a list, or just one plot */
+%testgrowth(my_vars = ph, plots_wanted = ROC) ;
+%testgrowth(my_vars = nisin, plots_wanted = ROC) ;
+%testgrowth(my_vars = temperature, plots_wanted = ROC) ;
+%testgrowth(my_vars = brix, plots_wanted = ROC) ;
+* %testgrowth(my_vars = ph nisin temperature brix, plots_wanted = ROC) ;
+
+/* The model with all the variables gets its own code because 
+*  the selection method was specified in the homework instructions. */
+title "Proc Logistic Output for All Variables with Stepwise Selection Method" ;
+	ods graphics on ;
+proc logistic data=wk6.apple_juice
+	plots = ROC ;
+	model growth (event='1') = ph nisin temperature brix
+		/selection=stepwise;
+run ;
 	
 {% endhighlight %}
 
