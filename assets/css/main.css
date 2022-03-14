@@ -785,6 +785,14 @@ h1 {
   font-weight: 400;
 }
 
+.page-content h2 {
+  color: #0077B6
+}
+
+.page-content h3 {
+  color: #0096C7
+}
+
 img {
   max-width: 100%;
   vertical-align: middle;
@@ -796,8 +804,20 @@ img + em {
   display: block;
   margin-top: 10px;
   font-style: normal;
-  font-weight: bold;
-  font-size: 14px;
+  font-weight: 600;
+  font-size: 18px;
+  color: #0077B6;
+}
+
+/* --- My img caption edits --- */
+em + img {
+  text-align: center;
+  display: block;
+  margin-top: 10px;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 18px;
+  color: #0077B6;
 }
 
 blockquote {
@@ -1369,21 +1389,6 @@ a.newer-posts:hover {
   text-decoration: underline;
 }
 
-/* - - - - - - - - - - Image Captions - - - - - - - - - */
-/* --- My edits for img things not styled elsewhere --- */
-img + em {
-  text-decoration: italic;
-  font-weight: 400;
-  font-size: 1.2em;
-  color: #0077B6;
-}
-
-em + img {
-  text-decoration: italic;
-  font-weight: 400;
-  font-size: 1.2em;
-  color: #0077B6;
-}
 
 /* - - - - - - - - - - Tag Styles - - - - - - - - - - */
 .blog-tags {
