@@ -25,7 +25,7 @@ I wrote the following SAS code to explore the model features. Table 1 summarizes
 
  ![Table 1 Summary Stats]({{ site.url }}/assets/img/nisin-apple-juice-dataset-stats-fewer-dec.jpg)
 
-{% highlight ruby %}
+```terminal
 	libname wk6 "/folders/myfolders/" ;
 
 	/***** Introduce the Data *****/
@@ -59,7 +59,7 @@ I wrote the following SAS code to explore the model features. Table 1 summarizes
 			_NMISS_="# of Missing Values" ;
 	run ;
 	
-{% endhighlight %}
+```
 
 ### Logistic regression model
 The project instructions directed us to fit five models. The first four used only one feature each, while the fifth model used all four features. To make my code more efficient, I create a macro for the modeling process and then passed in each of the four predictors as parameters. The instructions for the fifth model dictated a stepwise variable selection approach. Thus, the fifth model was given its own section of code. 
