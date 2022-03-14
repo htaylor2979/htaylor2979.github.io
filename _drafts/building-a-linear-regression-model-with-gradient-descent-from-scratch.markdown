@@ -30,6 +30,6 @@ The first use of the Iris dataset is credited to Sir R.A. Fisher, and the data h
 * versicolor
 * virginica
 
-[pairplot-iris-features.JPG](/uploads/pairplot-iris-features.JPG)
+![pairplot-iris-features-149e4b.jpg](/uploads/pairplot-iris-features-149e4b.jpg)
 
 
