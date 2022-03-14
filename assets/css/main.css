@@ -1022,6 +1022,11 @@ table tfoot td {
   padding: 10px;
 }
 
+.nav-items ul {
+  margin: 0;
+  padding: 0;
+}
+
 .nav-items li {
   display: inline-block;
   margin: 5px;
