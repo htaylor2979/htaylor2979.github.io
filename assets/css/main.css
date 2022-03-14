@@ -1218,14 +1218,14 @@ footer .copyright {
 
 .post .post-content .post-title {
   margin: 0 0 10px;
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 400;
 }
 
 .post .post-content .post-title a {
   font-family: 'Tenor Sans', 'Trebuchet MS', 'Helvetica', sans-serif;
   text-decoration: none;
-  color: #023E8A; /* Original theme #263959 */
+  color: #007EA7; /* Original theme #263959 */
 }
 
 .post .post-content p {
