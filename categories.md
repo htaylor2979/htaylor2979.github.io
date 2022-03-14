@@ -16,7 +16,6 @@ layout: page
     
     {% for post in site.categories[category_name] %}
       <article class="post">
-          <h4><a href="{{ site.baseurl }}{{ post.url }}">{{post.title}}</a></h4>
             {% if post.img %}
               <a class="post-thumbnail" style="background-image: url({{"/assets/img/" | prepend: site.baseurl | append : post.img}})" href="{{post.url | prepend: site.baseurl}}"></a>
             {% else %}
