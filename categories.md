@@ -8,6 +8,7 @@ layout: page
 ---
 
 {% for category in site.categories %}
+    {% capture category_name %}{{ category | first }}{% endcapture %}
     <h2 class="category-head">{{ category_name }}</h2>
     <a name="{{ category_name | slugize }}"></a>
     {% for post in site.categories[category_name] %}
