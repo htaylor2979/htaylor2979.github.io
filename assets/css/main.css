@@ -1218,14 +1218,15 @@ footer .copyright {
 
 .post .post-content .post-title {
   margin: 0 0 10px;
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 400;
+  line-height: 1.2;
 }
 
 .post .post-content .post-title a {
   font-family: 'Tenor Sans', 'Trebuchet MS', 'Helvetica', sans-serif;
   text-decoration: none;
-  color: #263959;
+  color: #007EA7; /* Original theme #263959 */
 }
 
 .post .post-content p {
@@ -1269,6 +1270,7 @@ a.newer-posts:hover {
   font-weight: 400;
   margin: 0 0 10px;
   line-height: 1.3;
+  color: #0077B6;
 }
 
 .header-page .page-date {
@@ -1419,6 +1421,65 @@ a.newer-posts:hover {
 }
 
 .tag-list span a:hover {
+  text-decoration: underline;
+  opacity: .8;
+}
+
+/* - - - - - - - - - - Category Styles - - - - - - - - - - */
+/* --- Added to mimic the styling of theme's tags page. --- */
+.blog-cats {
+  width: 100%;
+  background-color: #ffffff;
+  padding: 0 20px 20px;
+}
+
+.blog-cats h1 {
+  font-size: 28px;
+  font-weight: 400;
+  text-align: center;
+  line-height: 1.3;
+  color: #0077B6;
+  border-bottom: 2px solid #0077B6;
+}
+
+.blog-cats h2 {
+  color: #023E8A;
+  margin: 10px 0;
+}
+
+.categories {
+  margin: 0;
+  padding: 10px;
+}
+
+.categories li {
+  display: inline-block;
+  margin: 5px;
+  list-style: none;
+}
+
+.categories li a {
+  text-decoration: none;
+  color: #263959;
+  display: inline-block;
+  padding: 5px 10px;
+  border: 1px solid #ecf0f1;
+  background-color: #fafafa;
+  -webkit-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+}
+
+.categories li a:hover {
+  background-color: #ecf0f1;
+}
+
+.cat-list span a {
+  text-decoration: none;
+  color: #263959;
+}
+
+.cat-list span a:hover {
   text-decoration: underline;
   opacity: .8;
 }
