@@ -12,7 +12,9 @@ layout: default
       <p>{{site.about-author}}</p>
     </div>
     <div class="nav">
-      <p>Projects by Category</p>
+      {% if page.layout == "main" %}<p><a href="{{site.baseurl}}/categories">Projects by Category</a></p>
+      {% else %}<p><a href="{{site.baseurl}}/">Recent Posts</a></p>
+      {% endif %}
     </div>
   </header> <!-- End Header -->
   <footer>
