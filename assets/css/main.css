@@ -1373,7 +1373,8 @@ a.newer-posts:hover {
 /* --- My edits for img things not styled elsewhere --- */
 img + em {
   text-decoration: italic;
-  font-size: 12px;
+  font-weight: 400;
+  font-size: 14px;
   color: #0077B6;
 }
 
