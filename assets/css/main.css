@@ -1374,7 +1374,7 @@ a.newer-posts:hover {
 img + em {
   text-decoration: italic;
   font-weight: 400;
-  font-size: 1em;
+  font-size: 1.2em;
   color: #0077B6;
 }
 
