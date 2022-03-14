@@ -7,9 +7,9 @@ Field name:
 layout: page
 ---
 
-<div id="archives">
+
 {% for category in site.categories %}
-  <div class="archive-group">
+
     {% capture category_name %}{{ category | first }}{% endcapture %}
     <div id="#{{ category_name | slugize }}"></div>
     <p></p>
@@ -45,6 +45,6 @@ layout: page
           {% endif %}
         </article>
       {% endfor %}
-      </div>
+      
 {% endfor %}
-</div>
+
