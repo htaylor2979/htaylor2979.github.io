@@ -33,6 +33,7 @@ The first use of the Iris dataset is credited to Sir R.A. Fisher, and the data h
 ### Visualizing the Data
 The scatter plots below give a quick comparison of 
 
+
 *Figure 1: Pair plots comparing the relationships among data features*
 ![Pair Plots of Iris Features]({{ site.url }}/assets/img/iris-data/pairplot-iris-features.jpg)
 
