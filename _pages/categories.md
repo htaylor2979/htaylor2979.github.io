@@ -1,6 +1,6 @@
 ---
-layout: main
 title: categories
+layout: main
 ---
 
 <div id="archives">
