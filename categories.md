@@ -11,7 +11,7 @@ layout: page
     {% capture category_name %}{{ category | first }}{% endcapture %}
     <div id="#{{ category_name | slugize }}"></div>
     <h3 class="category-head">{{ category_name }}</h3>
-    <a name="{{ category_name | slugize }}"></a>
+    <!-- <a name="{{ category_name | slugize }}"></a> -->
     
     
     {% for post in site.categories[category_name] %}
@@ -21,6 +21,14 @@ layout: page
               <a class="post-thumbnail" style="background-image: url({{"/assets/img/" | prepend: site.baseurl | append : post.img}})" href="{{post.url | prepend: site.baseurl}}"></a>
             {% else %}
             {% endif %}
+            
+            <div class="post-content">
+              <h2 class="post-title"><a href="{{post.url | prepend: site.baseurl}}">{{post.title}}</a></h2>
+              <p>{{ post.content | strip_html | truncatewords: 15 }}</p>
+              <span class="post-date">{{post.date | date: '%Y, %b %d'}}&nbsp;&nbsp;&nbsp;—&nbsp;</span>
+              <span class="post-words">{% capture words %}{{ post.content | number_of_words }}{% endcapture %}{% unless words contains "-" %}{{ words | plus: 250 | divided_by: 250 | append: " minute read" }}{% endunless %}</span>
+            </div>
+            
       </article>
     {% endfor %}
     
