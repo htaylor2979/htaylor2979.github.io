@@ -1001,7 +1001,7 @@ table tfoot td {
 }
 
 
-.nav .category-name {
+.nav .category-list {
   font-family: 'Tenor Sans', 'Trebuchet MS', 'Helvetica', sans-serif;
   margin: 0 0 10px;
   position: relative;
@@ -1012,7 +1012,7 @@ table tfoot td {
   font-weight: 700;
 }
 
-.nav .category-name::after {
+.nav .category-list::after {
   content: "";
   position: absolute;
   left: 50%;
