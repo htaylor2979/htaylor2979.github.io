@@ -1,7 +1,7 @@
 ---
 title: Predicting Survival of Bacterial Spores Using Logistic Regression in SAS
 date: 2019-10-20 20:00:00 -04:00
-permalink: predicting-survival-of-spores-sas
+permalink: "/post/predicting-survival-of-spores-sas"
 categories:
 - Machine Learning
 tags:
