@@ -19,13 +19,13 @@ The inspiration for this project came from Andrew Ng’s “Machine Learning” 
 ## The Data
 The first use of the Iris dataset is credited to Sir R.A. Fisher, and the data has frequently been used in demonstrating pattern recognition and classification in machine learning. The target variable is the iris species, with three possible values. It is a small dataset with 150 rows and four features. The observations are divided evenly, 50 rows of each species, and there are no missing values.
 
-**Data Features: **
+#### Data Features:
 * Sepal Length (cm) 	
 * Sepal Width (cm) 	
 * Petal Length (cm) 	
 * Petal Width (cm)
 
-**Target Variable: Species**
+#### Target Variable: Species
 * setosa
 * versicolor
 * virginica
