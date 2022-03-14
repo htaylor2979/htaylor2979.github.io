@@ -786,10 +786,12 @@ h1 {
 }
 
 .page-content h2 {
+  font-weight: 400;
   color: #0077B6
 }
 
 .page-content h3 {
+  font-weight: 400;
   color: #0096C7
 }
 
