@@ -805,10 +805,10 @@ img + em {
   text-align: center;
   display: block;
   margin-top: 10px;
-  font-style: normal;
-  font-weight: 600;
+  font-style: italic;
+  font-weight: 700;
   font-size: 18px;
-  color: #0077B6;
+  color: #0096C7
 }
 
 /* --- My img caption edits --- */
@@ -817,9 +817,9 @@ em + img {
   display: block;
   margin-top: 10px;
   font-style: italic;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 18px;
-  color: #0077B6;
+  color: #0096C7
 }
 
 blockquote {
