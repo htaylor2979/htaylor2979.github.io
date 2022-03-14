@@ -44,13 +44,10 @@ layout: default
   </footer> <!-- End Footer -->
 </aside> <!-- End Sidebar -->
 <div class="content-box clearfix">
-<ul>
   {% for post in site.posts %}
-    <li>
+      <a href="{{ post.url }}">{{ post.image }}</a>
       <a href="{{ post.url }}">{{ post.title }}</a>
       {{ post.excerpt }} </br>
       {{ post.tags }}
-    </li>
   {% endfor %}
-</ul>
 </div>
