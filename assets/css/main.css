@@ -787,12 +787,12 @@ h1 {
 
 .page-content h2 {
   font-weight: 400;
-  color: #0077B6
+  color: #1c558e;
 }
 
 .page-content h3 {
   font-weight: 400;
-  color: #0096C7
+  color: #1c558e;
 }
 
 img {
@@ -1407,7 +1407,7 @@ a.newer-posts:hover {
 }
 
 .blog-tags h2 {
-  color: #263959;
+  color: #1c558e;
   margin: 10px 0;
 }
 
@@ -1466,7 +1466,7 @@ a.newer-posts:hover {
 }
 
 .blog-cats h2 {
-  color: #023E8A;
+  color: #1c558e;
   margin: 10px 0;
 }
 
