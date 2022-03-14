@@ -1624,3 +1624,6 @@ a.newer-posts:hover {
     font-size: 21px;
   }
 }
+
+/* - - - - - Import Syntax Highlighter Styles for Rougs - - - - -  */
+@import 'syntax-thankful-eyes';
