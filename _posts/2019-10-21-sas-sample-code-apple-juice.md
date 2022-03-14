@@ -25,7 +25,7 @@ I wrote the following SAS code to explore the model features. Table 1 summarizes
 
  ![Table 1 Summary Stats]({{ site.url }}/assets/img/nisin-apple-juice-dataset-stats-fewer-dec.jpg)
 
-```terminal
+```sas
 	libname wk6 "/folders/myfolders/" ;
 
 	/***** Introduce the Data *****/
