@@ -1,6 +1,10 @@
 ---
 title: Building a Linear Regression Model with Gradient Descent from Scratch
 date: 2022-03-14 12:23:00 -04:00
+categories:
+- Machine Learning
+tags:
+- Python
 ---
 
 ## Introduction
