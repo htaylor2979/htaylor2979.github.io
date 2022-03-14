@@ -5,12 +5,12 @@ permalink: "/categories/"
 layout: main
 ---
 
-<div id="archives">
+<section class="blog-cats">
 {% for category in site.categories %}
-  <div class="archive-group">
+  
     {% capture category_name %}{{ category | first }}{% endcapture %}
     <!-- div id="#{{ category_name | slugize }}"></div -->
-    <h3 class="category-head">{{ category_name }}</h3>
+    <h1>{{ category_name }}</h1>
     <!-- <a name="{{ category_name | slugize }}"></a> -->
     
     
@@ -46,6 +46,6 @@ layout: main
     {% endfor %}
     
     
-  </div>
+  
 {% endfor %}
-</div>
+</section>

@@ -1423,6 +1423,62 @@ a.newer-posts:hover {
   opacity: .8;
 }
 
+/* - - - - - - - - - - Category Styles - - - - - - - - - - */
+.blog-cats {
+  width: 100%;
+  background-color: #ffffff;
+  padding: 0 20px 20px;
+}
+
+.blog-cats h1 {
+  font-size: 30px;
+  text-align: center;
+  line-height: 1.3;
+  color: #263959;
+}
+
+.blog-cats h2 {
+  color: #263959;
+  margin: 10px 0;
+}
+
+.categories {
+  margin: 0;
+  padding: 10px;
+}
+
+.categories li {
+  display: inline-block;
+  margin: 5px;
+  list-style: none;
+}
+
+.categories li a {
+  text-decoration: none;
+  color: #263959;
+  display: inline-block;
+  padding: 5px 10px;
+  border: 1px solid #ecf0f1;
+  background-color: #fafafa;
+  -webkit-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+}
+
+.categories li a:hover {
+  background-color: #ecf0f1;
+}
+
+.cat-list span a {
+  text-decoration: none;
+  color: #263959;
+}
+
+.cat-list span a:hover {
+  text-decoration: underline;
+  opacity: .8;
+}
+
 /* - - - - - - - - - - Media Styles - - - - - - - - - - */
 /* Medium Devices, Desktops */
 @media only screen and (max-width: 992px) {
