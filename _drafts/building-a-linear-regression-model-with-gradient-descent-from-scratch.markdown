@@ -31,6 +31,7 @@ The first use of the Iris dataset is credited to Sir R.A. Fisher, and the data h
 * virginica
 
 ### Visualizing the Data
+The scatter plots below give a quick comparison of 
+
+*image_caption*
 ![Pair Plots of Iris Features]({{ site.url }}/assets/img/iris-data/pairplot-iris-features.jpg)
-
-
