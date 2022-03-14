@@ -1006,7 +1006,7 @@ table tfoot td {
   top: 20px;
 }
 
-.nav {
+.nav h3 {
   font-family: 'Tenor Sans', 'Trebuchet MS', 'Helvetica', sans-serif;
   margin: 0 0 10px;
   position: relative;
@@ -1015,12 +1015,6 @@ table tfoot td {
   text-transform: capitalize;
   color: #333030;
   font-weight: 300;
-}
-
-.nav p {
-  font-size: 16px;
-  margin: 0 0 10px;
-  text-align: center;
 }
 
 .content-box {
