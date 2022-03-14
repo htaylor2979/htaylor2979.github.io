@@ -17,7 +17,7 @@
     <meta content="You have found the portfolio of Hellen Taylor. I am a detail-oriented, analytical problem solver with academic experience in data visualization and SQL and real-world experience in cleaning retail product data from multiple suppliers." property="og:description">
   
   
-    <meta content="https://htaylor2979.github.io/machine%20learning/2019/10/20/sas-sample-code-apple-juice.html" property="og:url">
+    <meta content="https://htaylor2979.github.io/predicting-survival-of-spores-sas" property="og:url">
   
   
     <meta content="2019-10-20T20:00:00-04:00" property="article:published_time">
@@ -44,7 +44,7 @@
     <meta name="twitter:title" content="Predicting Survival of Bacterial Spores Using Logistic Regression in SAS">
   
   
-    <meta name="twitter:url" content="https://htaylor2979.github.io/machine%20learning/2019/10/20/sas-sample-code-apple-juice.html">
+    <meta name="twitter:url" content="https://htaylor2979.github.io/predicting-survival-of-spores-sas">
   
   
     <meta name="twitter:description" content="You have found the portfolio of Hellen Taylor. I am a detail-oriented, analytical problem solver with academic experience in data visualization and SQL and real-world experience in cleaning retail product data from multiple suppliers.">
@@ -76,6 +76,8 @@
 	<link rel="stylesheet" href="/assets/fonts/font-awesome/css/font-awesome.min.css">
 	<!-- Styles -->
 	<link rel="stylesheet" href="/assets/css/main.css">
+  <!-- Syntax Highlighting Style Sheet -->
+  <link rel="stylesheet" href="/assets/css/syntax-hightlight.css">
 </head>
 
 <body>
@@ -146,74 +148,73 @@
 
 <p><img src="https://htaylor2979.github.io/assets/img/nisin-apple-juice-dataset-stats-fewer-dec.jpg" alt="Table 1 Summary Stats" /></p>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby">	<span class="n">libname</span> <span class="n">wk6</span> <span class="s2">"/folders/myfolders/"</span> <span class="p">;</span>
+<figure class="highlight"><pre><code class="language-sas" data-lang="sas"><span class="k">libname</span> <span class="nv">wk6</span> <span class="s2">"/folders/myfolders/"</span> <span class="p">;</span>
 
-	<span class="sr">/***** Introduce the Data *****/</span>
+<span class="cm">/***** Introduce the Data *****/</span>
 
-	<span class="o">*</span> <span class="no">Check</span> <span class="n">the</span> <span class="n">dataset</span> <span class="n">file</span> <span class="n">contents</span> <span class="p">;</span>
-	<span class="nb">proc</span> <span class="n">contents</span> <span class="n">data</span><span class="o">=</span><span class="n">wk6</span><span class="p">.</span><span class="nf">apple_juice</span> <span class="p">;</span>
-		<span class="n">label</span> <span class="p">;</span>
-	<span class="n">run</span> <span class="p">;</span>
+<span class="c1">* Check the dataset file contents ;</span>
+<span class="k">proc</span> <span class="k">contents</span> <span class="k">data</span><span class="o">=</span><span class="n">wk6</span><span class="p">.</span><span class="n">apple_juice</span> <span class="p">;</span>
+	<span class="k">label</span> <span class="p">;</span>
+<span class="k">run</span> <span class="p">;</span>
 
-	<span class="nb">proc</span> <span class="n">freq</span> <span class="n">data</span><span class="o">=</span><span class="n">wk6</span><span class="p">.</span><span class="nf">apple_juice</span> <span class="p">;</span>
-	<span class="n">run</span> <span class="p">;</span>
+<span class="k">proc</span> <span class="k">freq</span> <span class="k">data</span><span class="o">=</span><span class="n">wk6</span><span class="p">.</span><span class="n">apple_juice</span> <span class="p">;</span>
+<span class="k">run</span> <span class="p">;</span>
 
-	<span class="o">*</span> <span class="no">Generate</span> <span class="n">descriptive</span> <span class="n">stats</span> <span class="p">;</span>
-	<span class="n">ods</span> <span class="n">graphics</span> <span class="n">on</span><span class="p">;</span>
-	<span class="nb">proc</span> <span class="n">univariate</span> <span class="n">data</span> <span class="o">=</span> <span class="n">wk6</span><span class="p">.</span><span class="nf">apple_juice</span> 
-		<span class="n">outtable</span> <span class="o">=</span> <span class="n">applej_stats</span>  
-		<span class="n">noprint</span>	<span class="p">;</span>
-	<span class="n">run</span><span class="p">;</span>
+<span class="c1">* Generate descriptive stats ;</span>
+<span class="n">ods</span> <span class="n">graphics</span> <span class="n">on</span><span class="p">;</span>
+<span class="k">proc</span> <span class="k">univariate</span> <span class="k">data</span> <span class="o">=</span> <span class="n">wk6</span><span class="p">.</span><span class="n">apple_juice</span> 
+	<span class="n">outtable</span> <span class="o">=</span> <span class="n">applej_stats</span>  
+	<span class="n">noprint</span>	<span class="p">;</span>
+<span class="k">run</span><span class="p">;</span>
 
-	<span class="o">*</span> <span class="no">Print</span> <span class="n">a</span> <span class="n">short</span> <span class="n">table</span> <span class="n">of</span> <span class="n">descriptive</span> <span class="n">stats</span> <span class="p">;</span>
-	<span class="n">title</span> <span class="s2">"Descriptive Stats for the Apple Juice Dataset"</span> <span class="p">;</span>
-	<span class="nb">proc</span> <span class="nb">print</span> <span class="n">data</span> <span class="o">=</span> <span class="n">applej_stats</span>
-		<span class="n">noobs</span> <span class="n">label</span> <span class="p">;</span>
-		<span class="n">var</span> <span class="n">_VAR_</span> <span class="n">_NOBS_</span> <span class="n">_MIN_</span> <span class="n">_MEDIAN_</span> <span class="n">_MEAN_</span> <span class="n">_MAX_</span> <span class="n">_SKEW_</span> <span class="n">_NMISS_</span> <span class="p">;</span>
-		<span class="n">label</span> 
-			<span class="n">_MIN_</span><span class="o">=</span><span class="s2">"Minimum"</span> 
-			<span class="n">_MAX_</span><span class="o">=</span><span class="s2">"Maximum"</span> 
-			<span class="n">_MEAN_</span><span class="o">=</span><span class="s2">"Mean"</span> 
-			<span class="n">_MEDIAN_</span><span class="o">=</span><span class="s2">"Median"</span> 
-			<span class="n">_SKEW_</span> <span class="o">=</span> <span class="s2">"Skew"</span>
-			<span class="n">_NMISS_</span><span class="o">=</span><span class="s2">"# of Missing Values"</span> <span class="p">;</span>
-	<span class="n">run</span> <span class="p">;</span>
-	</code></pre></figure>
+<span class="c1">* Print a short table of descriptive stats ;</span>
+<span class="k">title</span> <span class="s2">"Descriptive Stats for the Apple Juice Dataset"</span> <span class="p">;</span>
+<span class="k">proc</span> <span class="k">print</span> <span class="k">data</span> <span class="o">=</span> <span class="n">applej_stats</span>
+	<span class="k">noobs</span> <span class="k">label</span> <span class="p">;</span>
+	<span class="k">var</span> <span class="n">_VAR_</span> <span class="n">_NOBS_</span> <span class="n">_MIN_</span> <span class="n">_MEDIAN_</span> <span class="n">_MEAN_</span> <span class="n">_MAX_</span> <span class="n">_SKEW_</span> <span class="n">_NMISS_</span> <span class="p">;</span>
+	<span class="k">label</span> 
+		<span class="n">_MIN_</span><span class="o">=</span><span class="s2">"Minimum"</span> 
+		<span class="n">_MAX_</span><span class="o">=</span><span class="s2">"Maximum"</span> 
+		<span class="n">_MEAN_</span><span class="o">=</span><span class="s2">"Mean"</span> 
+		<span class="n">_MEDIAN_</span><span class="o">=</span><span class="s2">"Median"</span> 
+		<span class="n">_SKEW_</span> <span class="o">=</span> <span class="s2">"Skew"</span>
+		<span class="n">_NMISS_</span><span class="o">=</span><span class="s2">"# of Missing Values"</span> <span class="p">;</span>
+<span class="k">run</span> <span class="p">;</span></code></pre></figure>
 
 <h3 id="logistic-regression-model">Logistic regression model</h3>
 <p>The project instructions directed us to fit five models. The first four used only one feature each, while the fifth model used all four features. To make my code more efficient, I create a macro for the modeling process and then passed in each of the four predictors as parameters. The instructions for the fifth model dictated a stepwise variable selection approach. Thus, the fifth model was given its own section of code.</p>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby">	<span class="sr">/***** Investigate Each Predictor *****/</span>
+<figure class="highlight"><pre><code class="language-sas" data-lang="sas"><span class="cm">/***** Investigate Each Predictor *****/</span>
 
-	<span class="sr">/* Run Proc Logistic on the four predictors, one at a time. 
-	* Implement a macro to save coding */</span>
+<span class="cm">/* Run Proc Logistic on the four predictors, one at a time. 
+* Implement a macro to save coding */</span>
 
-	<span class="o">%</span><span class="n">macro</span> <span class="n">testgrowth</span><span class="p">(</span><span class="n">my_vars</span> <span class="o">=</span><span class="p">,</span> <span class="n">plots_wanted</span> <span class="o">=</span><span class="p">,</span>  <span class="p">)</span> <span class="p">;</span>
-		<span class="n">title</span> <span class="s2">"Proc Logistic Output for Variable(s): &amp;my_vars"</span> <span class="p">;</span>
-		<span class="n">ods</span> <span class="n">graphics</span> <span class="n">on</span> <span class="p">;</span>
-		<span class="nb">proc</span> <span class="n">logistic</span> <span class="n">data</span><span class="o">=</span><span class="n">wk6</span><span class="p">.</span><span class="nf">apple_juice</span>
-			<span class="n">plots</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">plots_wanted</span><span class="o">.</span> <span class="p">;</span>
-			<span class="n">model</span> <span class="n">growth</span> <span class="p">(</span><span class="n">event</span><span class="o">=</span><span class="s1">'1'</span><span class="p">)</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">my_vars</span><span class="o">.</span> <span class="p">;</span>
-		<span class="n">run</span> <span class="p">;</span>
-	<span class="o">%</span><span class="n">mend</span> <span class="p">;</span>
-
-	<span class="sr">/* Input: plots_wanted can be none, all, a list, or just one plot */</span>
-	<span class="o">%</span><span class="n">testgrowth</span><span class="p">(</span><span class="n">my_vars</span> <span class="o">=</span> <span class="n">ph</span><span class="p">,</span> <span class="n">plots_wanted</span> <span class="o">=</span> <span class="no">ROC</span><span class="p">)</span> <span class="p">;</span>
-	<span class="o">%</span><span class="n">testgrowth</span><span class="p">(</span><span class="n">my_vars</span> <span class="o">=</span> <span class="n">nisin</span><span class="p">,</span> <span class="n">plots_wanted</span> <span class="o">=</span> <span class="no">ROC</span><span class="p">)</span> <span class="p">;</span>
-	<span class="o">%</span><span class="n">testgrowth</span><span class="p">(</span><span class="n">my_vars</span> <span class="o">=</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">plots_wanted</span> <span class="o">=</span> <span class="no">ROC</span><span class="p">)</span> <span class="p">;</span>
-	<span class="o">%</span><span class="n">testgrowth</span><span class="p">(</span><span class="n">my_vars</span> <span class="o">=</span> <span class="n">brix</span><span class="p">,</span> <span class="n">plots_wanted</span> <span class="o">=</span> <span class="no">ROC</span><span class="p">)</span> <span class="p">;</span>
-	<span class="o">*</span> <span class="o">%</span><span class="n">testgrowth</span><span class="p">(</span><span class="n">my_vars</span> <span class="o">=</span> <span class="n">ph</span> <span class="n">nisin</span> <span class="n">temperature</span> <span class="n">brix</span><span class="p">,</span> <span class="n">plots_wanted</span> <span class="o">=</span> <span class="no">ROC</span><span class="p">)</span> <span class="p">;</span>
-
-	<span class="sr">/* The model with all the variables gets its own code because 
-	*  the selection method was specified in the homework instructions. */</span>
-	<span class="n">title</span> <span class="s2">"Proc Logistic Output for All Variables with Stepwise Selection Method"</span> <span class="p">;</span>
+<span class="k">%macro</span> <span class="nf">testgrowth</span><span class="p">(</span><span class="n">my_vars</span> <span class="o">=</span><span class="p">,</span> <span class="n">plots_wanted</span> <span class="o">=</span><span class="p">,</span>  <span class="p">)</span> <span class="p">;</span>
+	<span class="k">title</span> <span class="s2">"Proc Logistic Output for Variable(s): </span><span class="si">&amp;my_vars</span><span class="s2">"</span> <span class="p">;</span>
 	<span class="n">ods</span> <span class="n">graphics</span> <span class="n">on</span> <span class="p">;</span>
-	<span class="nb">proc</span> <span class="n">logistic</span> <span class="n">data</span><span class="o">=</span><span class="n">wk6</span><span class="p">.</span><span class="nf">apple_juice</span>
-		<span class="n">plots</span> <span class="o">=</span> <span class="no">ROC</span> <span class="p">;</span>
-		<span class="n">model</span> <span class="n">growth</span> <span class="p">(</span><span class="n">event</span><span class="o">=</span><span class="s1">'1'</span><span class="p">)</span> <span class="o">=</span> <span class="n">ph</span> <span class="n">nisin</span> <span class="n">temperature</span> <span class="n">brix</span>
-			<span class="sr">/selection=stepwise;
-	run ;
-	</span></code></pre></figure>
+	<span class="k">proc</span> <span class="k">logistic</span> <span class="k">data</span><span class="o">=</span><span class="n">wk6</span><span class="p">.</span><span class="n">apple_juice</span>
+		<span class="n">plots</span> <span class="o">=</span> <span class="nv">&amp;plots_wanted.</span> <span class="p">;</span>
+		<span class="n">model</span> <span class="n">growth</span> <span class="p">(</span><span class="n">event</span><span class="o">=</span><span class="s1">'1'</span><span class="p">)</span> <span class="o">=</span> <span class="nv">&amp;my_vars.</span> <span class="p">;</span>
+	<span class="k">run</span> <span class="p">;</span>
+<span class="k">%mend</span> <span class="p">;</span>
+
+<span class="cm">/* Input: plots_wanted can be none, all, a list, or just one plot */</span>
+<span class="n">%testgrowth</span><span class="p">(</span><span class="n">my_vars</span> <span class="o">=</span> <span class="n">ph</span><span class="p">,</span> <span class="n">plots_wanted</span> <span class="o">=</span> <span class="n">ROC</span><span class="p">)</span> <span class="p">;</span>
+<span class="n">%testgrowth</span><span class="p">(</span><span class="n">my_vars</span> <span class="o">=</span> <span class="n">nisin</span><span class="p">,</span> <span class="n">plots_wanted</span> <span class="o">=</span> <span class="n">ROC</span><span class="p">)</span> <span class="p">;</span>
+<span class="n">%testgrowth</span><span class="p">(</span><span class="n">my_vars</span> <span class="o">=</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">plots_wanted</span> <span class="o">=</span> <span class="n">ROC</span><span class="p">)</span> <span class="p">;</span>
+<span class="n">%testgrowth</span><span class="p">(</span><span class="n">my_vars</span> <span class="o">=</span> <span class="n">brix</span><span class="p">,</span> <span class="n">plots_wanted</span> <span class="o">=</span> <span class="n">ROC</span><span class="p">)</span> <span class="p">;</span>
+<span class="c1">* %testgrowth(my_vars = ph nisin temperature brix, plots_wanted = ROC) ;</span>
+
+<span class="cm">/* The model with all the variables gets its own code because 
+*  the selection method was specified in the homework instructions. */</span>
+<span class="k">title</span> <span class="s2">"Proc Logistic Output for All Variables with Stepwise Selection Method"</span> <span class="p">;</span>
+	<span class="n">ods</span> <span class="n">graphics</span> <span class="n">on</span> <span class="p">;</span>
+<span class="k">proc</span> <span class="k">logistic</span> <span class="k">data</span><span class="o">=</span><span class="n">wk6</span><span class="p">.</span><span class="n">apple_juice</span>
+	<span class="n">plots</span> <span class="o">=</span> <span class="n">ROC</span> <span class="p">;</span>
+	<span class="n">model</span> <span class="n">growth</span> <span class="p">(</span><span class="n">event</span><span class="o">=</span><span class="s1">'1'</span><span class="p">)</span> <span class="o">=</span> <span class="n">ph</span> <span class="n">nisin</span> <span class="n">temperature</span> <span class="n">brix</span>
+		<span class="o">/</span><span class="n">selection</span><span class="o">=</span><span class="n">stepwise</span><span class="p">;</span>
+<span class="k">run</span> <span class="p">;</span>
+	</code></pre></figure>
 
 <h3 id="the-fifth-and-final-model">The fifth and final model</h3>
 <p>A receiver operating characteristic (ROC) curve was printed for each model to determine how well it predicted the spores’ survival. Among these, the first four models showed a noticeably smaller area under curve (AUC). Given that a larger AUC indicates an overall better true positive rate vs. false positive rate, the fifth model performed the best. Its ROC curve is pictured below.</p>
@@ -226,9 +227,9 @@
 
       <div class="page-footer">
         <div class="page-share">
-          <a href="https://twitter.com/intent/tweet?text=Predicting Survival of Bacterial Spores Using Logistic Regression in SAS&url=https://htaylor2979.github.io/machine%20learning/2019/10/20/sas-sample-code-apple-juice.html" title="Share on Twitter" rel="nofollow" target="_blank">Twitter</a>
-          <a href="https://facebook.com/sharer.php?u=https://htaylor2979.github.io/machine%20learning/2019/10/20/sas-sample-code-apple-juice.html" title="Share on Facebook" rel="nofollow" target="_blank">Facebook</a>
-          <a href="https://plus.google.com/share?url=https://htaylor2979.github.io/machine%20learning/2019/10/20/sas-sample-code-apple-juice.html" title="Share on Google+" rel="nofollow" target="_blank">Google+</a>
+          <a href="https://twitter.com/intent/tweet?text=Predicting Survival of Bacterial Spores Using Logistic Regression in SAS&url=https://htaylor2979.github.io/predicting-survival-of-spores-sas" title="Share on Twitter" rel="nofollow" target="_blank">Twitter</a>
+          <a href="https://facebook.com/sharer.php?u=https://htaylor2979.github.io/predicting-survival-of-spores-sas" title="Share on Facebook" rel="nofollow" target="_blank">Facebook</a>
+          <a href="https://plus.google.com/share?url=https://htaylor2979.github.io/predicting-survival-of-spores-sas" title="Share on Google+" rel="nofollow" target="_blank">Google+</a>
         </div>
         <div class="page-tag">
           
