@@ -1369,6 +1369,14 @@ a.newer-posts:hover {
   text-decoration: underline;
 }
 
+/* - - - - - - - - - - Image Captions - - - - - - - - - */
+/* --- My edits for img things not styled elsewhere --- */
+img + em {
+  text-decoration: italic;
+  font-size: 12px;
+  color: #0077B6;
+}
+
 /* - - - - - - - - - - Tag Styles - - - - - - - - - - */
 .blog-tags {
   width: 100%;
