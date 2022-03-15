@@ -1078,6 +1078,7 @@ table tfoot td {
 
 .nav-items-list span a:hover {
   text-decoration: underline;
+  background-color: #CAF0F8;
   opacity: .8;
 }
 
