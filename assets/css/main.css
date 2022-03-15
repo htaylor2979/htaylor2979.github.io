@@ -1021,6 +1021,7 @@ table tfoot td {
   font-size: 16px;
   margin: 0 0 10px;
 }
+
  /* - - - Nav Bar (Added to Original Theme File) - - - */
 .nav {
   margin: 0 0 20px;
@@ -1067,8 +1068,13 @@ table tfoot td {
   transition: all .3s;
 }
 
+.nav-items .selected li a {
+  background-color: c1dff0; 
+}
+
 .nav-items li a:hover {
-  background-color: #ecf0f1;
+  text-decoration: underline;
+  background-color: #D6E6F5;
 }
 
 .nav-items-list span a {
@@ -1078,6 +1084,7 @@ table tfoot td {
 
 .nav-items-list span a:hover {
   text-decoration: underline;
+  background-color: #D6E6F5;
   opacity: .8;
 }
 
@@ -1374,7 +1381,7 @@ a.newer-posts:hover {
 }
 
 .page-footer .page-share a:hover {
-  background-color: #ecf0f1;
+  background-color: #D6E6F5;
 }
 
 .page-footer .page-tag a {
@@ -1382,13 +1389,14 @@ a.newer-posts:hover {
   font-size: 10px;
   padding: 5px 10px;
   margin-left: 5px;
-  color: #263959;
+  background-color: #CEEBF1;
   text-transform: uppercase;
   border: 1px solid #263959;
 }
 
 .page-footer .page-tag a:hover {
   text-decoration: underline;
+  background-color: D6E6F5;
 }
 
 
@@ -1435,7 +1443,8 @@ a.newer-posts:hover {
 }
 
 .tags li a:hover {
-  background-color: #ecf0f1;
+  text-decoration: underline;
+  background-color: #D6E6F5;
 }
 
 .tag-list span a {
@@ -1494,7 +1503,7 @@ a.newer-posts:hover {
 }
 
 .categories li a:hover {
-  background-color: #ecf0f1;
+  background-color: #D6E6F5;
 }
 
 .cat-list span a {
@@ -1504,6 +1513,7 @@ a.newer-posts:hover {
 
 .cat-list span a:hover {
   text-decoration: underline;
+  background-color: #D6E6F5;
   opacity: .8;
 }
 
