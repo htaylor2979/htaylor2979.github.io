@@ -1074,7 +1074,7 @@ table tfoot td {
 
 .nav-items li a:hover {
   text-decoration: underline;
-  background-color: #D0ECF1;
+  background-color: #D4E7EE;
 }
 
 .nav-items-list span a {
@@ -1084,7 +1084,7 @@ table tfoot td {
 
 .nav-items-list span a:hover {
   text-decoration: underline;
-  background-color: #D0ECF1;
+  background-color: #D4E7EE;
   opacity: .8;
 }
 
@@ -1381,7 +1381,7 @@ a.newer-posts:hover {
 }
 
 .page-footer .page-share a:hover {
-  background-color: #D0ECF1;
+  background-color: #D4E7EE;
 }
 
 .page-footer .page-tag a {
@@ -1396,7 +1396,7 @@ a.newer-posts:hover {
 
 .page-footer .page-tag a:hover {
   text-decoration: underline;
-  background-color: D0ECF1;
+  background-color: D4E7EE;
 }
 
 
@@ -1444,7 +1444,7 @@ a.newer-posts:hover {
 
 .tags li a:hover {
   text-decoration: underline;
-  background-color: #D0ECF1;
+  background-color: #D4E7EE;
 }
 
 .tag-list span a {
@@ -1503,7 +1503,7 @@ a.newer-posts:hover {
 }
 
 .categories li a:hover {
-  background-color: #D0ECF1;
+  background-color: #D4E7EE;
 }
 
 .cat-list span a {
@@ -1513,7 +1513,7 @@ a.newer-posts:hover {
 
 .cat-list span a:hover {
   text-decoration: underline;
-  background-color: #D0ECF1;
+  background-color: #D4E7EE;
   opacity: .8;
 }
 
