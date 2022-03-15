@@ -15,11 +15,11 @@ layout: default
         <div class="nav-items">
           <ul>
             <!-- Categories link -->
-            {% if page.title == "Categories" %}<li><a href="{{site.baseurl}}/categories" class="selected">Projects by Category</a></li>
+            {% if page.title == "Categories" %}<li><a href="{{site.baseurl}}/categories" class="selected">Sort by Categories</a></li>
             {% else %}<li><a href="{{site.baseurl}}/categories">Projects by Category</a></li>
             {% endif %}
             <!-- Ordered by data -->
-            {% if page.title == "tags" %}<li><a href="{{site.baseurl}}/" class="selected">Projects by Skill</a></li>
+            {% if page.title == "tags" %}<li><a href="{{site.baseurl}}/" class="selected">Sort by Skills</a></li>
             {% else %}<li><a href="{{site.baseurl}}/">Projects by Skill</a></li>
             {% endif %}
           </ul>
