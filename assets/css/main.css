@@ -1021,6 +1021,7 @@ table tfoot td {
   font-size: 16px;
   margin: 0 0 10px;
 }
+
  /* - - - Nav Bar (Added to Original Theme File) - - - */
 .nav {
   margin: 0 0 20px;
@@ -1065,6 +1066,10 @@ table tfoot td {
   -webkit-transition: all .3s;
   -o-transition: all .3s;
   transition: all .3s;
+}
+
+.nav-items .selected li a {
+  background-color: c1dff0; 
 }
 
 .nav-items li a:hover {
