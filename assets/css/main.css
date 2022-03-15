@@ -1389,7 +1389,7 @@ a.newer-posts:hover {
   font-size: 10px;
   padding: 5px 10px;
   margin-left: 5px;
-  color: #CEEBF1;
+  background-color: #CEEBF1;
   text-transform: uppercase;
   border: 1px solid #263959;
 }
