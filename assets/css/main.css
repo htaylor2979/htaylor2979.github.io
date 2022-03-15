@@ -1073,6 +1073,7 @@ table tfoot td {
 }
 
 .nav-items li a:hover {
+  text-decoration: underline;
   background-color: #ecf0f1;
 }
 
