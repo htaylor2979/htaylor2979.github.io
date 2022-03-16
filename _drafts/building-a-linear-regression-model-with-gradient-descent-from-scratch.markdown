@@ -40,48 +40,35 @@ The scatter plots below, color coded by iris species, show the relationships amo
 ### Python Code for Loading the Data and Creating the Pair Plots
 
 {% highlight python %}
-# Sigmoid Function
-def sigmoid(z):
-    return 1 / (1 + np.exp(-1 * z)) 
+# Tables, arrays, and linear algebra
+import numpy as np
+import pandas as pd
+
+# Load a sample dataset
+from sklearn import datasets
+
+# Visualize the data
+import seaborn as sns
+sns.set_theme(style="ticks")
+import matplotlib.pyplot as plt
+
+iris = datasets.load_iris()
+
+iris_df = pd.DataFrame(iris.data)
+iris_df.columns=['Sepal Length',
+  'Sepal Width',
+  'Petal Length',
+  'Petal Width']
+iris_df['Species Code'] = iris.target
+
+# Map iris species names to a new column
+spec_names = iris.target_names
+iris_df['Species Name'] = iris_df['Species Code'].apply(lambda x: spec_names[x])
 {% endhighlight %}
 
-{% highlight python %}
-# COST of Logistic Regression
+*Figure 2: The first five rows of the Iris dataframe*
+![Iris data first five rows]({{ site.url }}/assets/img/iris-data/iris-dataframe-head.jpg)
 
-# Inputs:
-# X (without bias term) & y
-# theta = weights, as a 2D array
-# lam = regularization term lambda
-# Returns cost (J)
-
-def lr_cost(theta, X, y, lam):
-    
-    J = 0  # Initialize cost
-    m = X.shape[0] # Number of examples/rows
-    X = np.hstack((np.ones((1, m)).T, X))# Add ones for the bias theta
-    
-    # Check for case where a 1D array is passed in
-    if len(theta.shape) == 1: 
-        theta = theta.reshape((len(theta), 1))
-
-    # First row of theta is for the bias term
-    theta_reg = theta.copy()
-    theta_reg[0] = 0  # Set bias term to zero
-    
-    tiny = .00000001 # a very small value
-        
-    # Regularization term
-    reg_term = lam/(2 * m) * (theta_reg.T @ theta_reg)
-    
-    # Cost
-    log_loss = 1/m * np.sum(
-        (-1 * y * np.log(sigmoid(X @ theta) + tiny) 
-         - (1 - y) * np.log(1 - sigmoid(X @ theta)+ tiny))) 
-    
-    J = log_loss + reg_term
-
-    return J 
-{% endhighlight %}
 
 ## The Model: Logistic Regression with Gradient Descent
 Logistic regression uses the sigmoid function to model values between 0 and 1, which makes it useful for modeling True/False classifications. When choosing among multiple options, a different model is trained for each target value, and the results of each model are then compared to determine how best to classify each observation in the data.
@@ -128,5 +115,49 @@ It is worth noting that, while θ is referred to here as model “weights,” it
 ### Python Code for the Training and Testing the Model
 
 
+{% highlight python %}
+# Sigmoid Function
+def sigmoid(z):
+    return 1 / (1 + np.exp(-1 * z)) 
 {% endhighlight %}
+
+{% highlight python %}
+# COST of Logistic Regression
+
+# Inputs:
+# X (without bias term) & y
+# theta = weights, as a 2D array
+# lam = regularization term lambda
+# Returns cost (J)
+
+def lr_cost(theta, X, y, lam):
+    
+    J = 0  # Initialize cost
+    m = X.shape[0] # Number of examples/rows
+    X = np.hstack((np.ones((1, m)).T, X))# Add ones for the bias theta
+    
+    # Check for case where a 1D array is passed in
+    if len(theta.shape) == 1: 
+        theta = theta.reshape((len(theta), 1))
+
+    # First row of theta is for the bias term
+    theta_reg = theta.copy()
+    theta_reg[0] = 0  # Set bias term to zero
+    
+    tiny = .00000001 # a very small value
+        
+    # Regularization term
+    reg_term = lam/(2 * m) * (theta_reg.T @ theta_reg)
+    
+    # Cost
+    log_loss = 1/m * np.sum(
+        (-1 * y * np.log(sigmoid(X @ theta) + tiny) 
+         - (1 - y) * np.log(1 - sigmoid(X @ theta)+ tiny))) 
+    
+    J = log_loss + reg_term
+
+    return J 
+{% endhighlight %}
+
+
 
