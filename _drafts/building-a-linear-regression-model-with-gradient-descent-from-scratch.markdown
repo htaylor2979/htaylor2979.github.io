@@ -32,11 +32,13 @@ The first use of the Iris dataset is credited to Sir R.A. Fisher, and the data h
 
 ### Visualizing the Data
 The scatter plots below, color coded by iris species, show the relationships among the variables. In particular, petal length and petal width appear to have a positive linear relationship across the three species. We also see that the setosa species (green dots) has distinctly different petal and sepal measurements from the other two species. So, at a glance, one would expect the model to perform consistently well on setosa. On the other hand, the measurements for versicolor and virginica (coral and blue dots) overlap in the plots. So, one might expect the model to be somewhat less accurate in classifying these two species.
-
+&nbsp;
+&nbsp;
 
 *Figure 1: Pair plots comparing the relationships among data features*
 ![Pair Plots of Iris Features]({{ site.url }}/assets/img/iris-data/pairplot-iris-features.jpg)
-
+&nbsp;
+&nbsp;
 
 
 ### Python Code for Loading the Data and Creating the Pair Plots
@@ -69,11 +71,13 @@ iris_df['Species Code'] = iris.target
 spec_names = iris.target_names
 iris_df['Species Name'] = iris_df['Species Code'].apply(lambda x: spec_names[x])
 {% endhighlight %}
-
+&nbsp;
+&nbsp;
 
 *Figure 2: The first five rows of the Iris dataframe*
 ![Iris data first five rows]({{ site.url }}/assets/img/iris-data/iris-dataframe-head.jpg)
-
+&nbsp;
+&nbsp;
 
 
 {% highlight python %}
@@ -90,15 +94,19 @@ plot = sns.pairplot(iris_df.drop('Species Code', axis=1),
 
 plt.show()
 {% endhighlight %}
-
+&nbsp;
+&nbsp;
 
 ## The Model: Logistic Regression with Gradient Descent
 Logistic regression uses the sigmoid function to model values between 0 and 1, which makes it useful for modeling True/False classifications. When choosing among multiple options, a different model is trained for each target value, and the results of each model are then compared to determine how best to classify each observation in the data.
 
 The general form of the logistic regression model is a sigmoid function, which returns values between zero and one:
+&nbsp;
+&nbsp;
 
 ![Logistic regression sigmoid function]({{ site.url }}/assets/img/iris-data/sigmoid-function.jpg)
-
+&nbsp;
+&nbsp;
 
 **The variables in the above equation are:**
 
