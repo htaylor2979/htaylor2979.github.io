@@ -331,15 +331,24 @@ To test my code, I trained three models, plus one extra with Scikit Learn's logi
 * number of iterations = 1500, 
 * alpha = 0.01
 
-#### Model 1: Gradient Descent with All Features
+#### Model 1: Gradient Descent with All Features 
+*92% Accuracy*
 ![Model 1 Gradient Descent Confusion Matrix]({{ site.url }}/assets/img/iris-data/confusion-matrix-model1.png)
 
 #### Model 2: Gradient Descent with Only 'Sepal Width' and 'Petal Width'
+*82% Accuracy*
 ![Model 2 Gradient Descent Confusion Matrix]({{ site.url }}/assets/img/iris-data/confusion-matrix-model2.png)
 
 #### Model 3: Scikit Learn's Logistic Regression with All Features, Default Parameters
+*100% Accuracy*
 ![Model 3 Gradient Descent Confusion Matrix]({{ site.url }}/assets/img/iris-data/confusion-matrix-model3.png)
 
 ### Model 4: Gradient Descent with Polynomial Terms, All Features
+*100% Accuracy*
 ![Model 4 Gradient Descent Confusion Matrix]({{ site.url }}/assets/img/iris-data/confusion-matrix-model4.png)
 
+
+## Conclusion
+All three gradient descent models predicted correctly for species "setosa." This result is consistent with what we saw in the pairplots during the data visualization step, where species "setosa" was represented by clusters of green dots that had noticeably different measurement from the other two species. All models predictions had better than 90% accuracy, with Scikit Learn's model performing the best at 100% accuracy on the basic, unmodified x-values. 
+
+Accuracy of 100% would usually be reason to suspect that something was amiss. Perhaps some variation of the target variable had been used as a feature to train the model. However, in this case, the dataset is small and very simple. Furthermore, the plots showed that at least one of the species could be neatly separated into a separate group based on sepal and petal measurements, with no overlap into the measurement of other species. So, it seems more likely that the data in this case is simply very consistent. For these reasons, I concluded that the models are good, given the limited number of easily separable observations.
