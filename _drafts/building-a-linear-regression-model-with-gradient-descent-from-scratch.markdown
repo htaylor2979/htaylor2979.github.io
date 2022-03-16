@@ -135,7 +135,6 @@ Additional function used: **Numpy's argmax** function to find the column index f
    
 <br />
 <br />
-<br />
 
 ### Python Code for the Training and Testing the Model
 
@@ -309,5 +308,9 @@ def lr_predict_prob_all(theta, X):
     return sigmoid(X @ theta)
 {% endhighlight %}
 
+<br />
+<br />
+
+## Results
 
 
