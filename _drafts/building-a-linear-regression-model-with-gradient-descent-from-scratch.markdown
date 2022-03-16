@@ -32,13 +32,15 @@ The first use of the Iris dataset is credited to Sir R.A. Fisher, and the data h
 
 ### Visualizing the Data
 The scatter plots below, color coded by iris species, show the relationships among the variables. In particular, petal length and petal width appear to have a positive linear relationship across the three species. We also see that the setosa species (green dots) has distinctly different petal and sepal measurements from the other two species. So, at a glance, one would expect the model to perform consistently well on setosa. On the other hand, the measurements for versicolor and virginica (coral and blue dots) overlap in the plots. So, one might expect the model to be somewhat less accurate in classifying these two species.
-&nbsp;
-&nbsp;
+<br />
+<br />
+<br />
 
 *Figure 1: Pair plots comparing the relationships among data features*
 ![Pair Plots of Iris Features]({{ site.url }}/assets/img/iris-data/pairplot-iris-features.jpg)
-&nbsp;
-&nbsp;
+<br />
+<br />
+<br />
 
 
 ### Python Code for Loading the Data and Creating the Pair Plots
@@ -71,13 +73,15 @@ iris_df['Species Code'] = iris.target
 spec_names = iris.target_names
 iris_df['Species Name'] = iris_df['Species Code'].apply(lambda x: spec_names[x])
 {% endhighlight %}
-&nbsp;
-&nbsp;
+<br />
+<br />
+<br />
 
 *Figure 2: The first five rows of the Iris dataframe*
 ![Iris data first five rows]({{ site.url }}/assets/img/iris-data/iris-dataframe-head.jpg)
-&nbsp;
-&nbsp;
+<br />
+<br />
+<br />
 
 
 {% highlight python %}
@@ -105,8 +109,9 @@ The general form of the logistic regression model is a sigmoid function, which r
 &nbsp;
 
 ![Logistic regression sigmoid function]({{ site.url }}/assets/img/iris-data/sigmoid-function.jpg)
-&nbsp;
-&nbsp;
+<br />
+<br />
+<br />
 
 **The variables in the above equation are:**
 
@@ -141,6 +146,9 @@ It is worth noting that, while θ is referred to here as model “weights,” it
    * Ends outer loop when theta has been calculated and assigned for each class
    * Returns theta and the ordered list of classes in y
 
+<br />
+<br />
+<br />
 
 ### Python Code for the Training and Testing the Model
 
@@ -150,6 +158,7 @@ It is worth noting that, while θ is referred to here as model “weights,” it
 def sigmoid(z):
     return 1 / (1 + np.exp(-1 * z)) 
 {% endhighlight %}
+
 
 {% highlight python %}
 # COST of Logistic Regression
