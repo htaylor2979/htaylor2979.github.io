@@ -54,7 +54,7 @@ The steps I followed to code my Logistic Regression model were:
 1. Code the sigmoid function
 1. Code the cost function
    * Takes X, y, lambda (regularization coeff.), alpha (controls the size of the learning steps)
-   * Calls the sigmoid function to compute the sig
+   * Calls the sigmoid function to compute the sigmoid
 1. Code the gradient computation function (derivative of the cost)
 1. Code the gradient descent function to track the optimization of theta
    * Gradient descent takes X
@@ -63,7 +63,7 @@ The steps I followed to code my Logistic Regression model were:
 
 
 
----python
+--- python
 # Load a sample dataset
 from sklearn import datasets
 
