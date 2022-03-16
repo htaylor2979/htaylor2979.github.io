@@ -51,7 +51,7 @@ y = the classification of each iris’s species
 It is worth noting that, while θ is referred to here as model “weights,” it functions similarly to coefficients used in algebra. The main difference is that in algebra, the goal is usually to solve for the value of x. In machine learning, X represents multiple x-values that are the data already collected. The θ values are the variables that are being optimized to produce the smallest amount of error when X values are input into the trained model. 
 
 The steps I followed to code my Logistic Regression model were:
-1. 1. Code the sigmoid function
+1. Code the sigmoid function
 1. Code the cost function
    * Takes X, y, lambda (regularization coeff.), alpha (controls the size of the learning steps)
    * Calls the sigmoid function to compute the sig
