@@ -40,13 +40,14 @@ The scatter plots below, color coded by iris species, show the relationships amo
 ## The Model: Logistic Regression with Gradient Descent
 Logistic regression uses the sigmoid function to model values between 0 and 1, which makes it useful for modeling True/False classifications. When choosing among multiple options, a different model is trained for each target value, and the results of each model are then compared to determine how best to classify each observation in the data.
 
-Mathematically, the process can be represented by the following steps:
 
-Variables:
+### Mathematical Representation
 
-X = the inputs values (measurements of parts of the iris, in this case)
-y = the classification of each iris’s species
-θ = theta, representing an array of weights for each classification
+** Variables:
+
+* X = the inputs values (measurements of parts of the iris, in this case)
+* y = the classification of each iris’s species
+* θ = theta, representing an array of weights for each classification
 
 It is worth noting that, while θ is referred to here as model “weights,” it functions similarly to coefficients used in algebra. The main difference is that in algebra, the goal is usually to solve for the value of x. In machine learning, X represents multiple x-values that are the data already collected. The θ values are the variables that are being optimized to produce the smallest amount of error when X values are input into the trained model. 
 
