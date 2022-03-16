@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Building a Linear Regression Model with Gradient Descent from Scratch - Data Science Portfolio</title>
+
+  <!-- Edit site and author settings in `_config.yml` to make the social details your own -->
+
+    <meta content="Data Science Portfolio" property="og:site_name">
+  
+    <meta content="Building a Linear Regression Model with Gradient Descent from Scratch" property="og:title">
+  
+  
+    <meta content="article" property="og:type">
+  
+  
+    <meta content="You have found the portfolio of Hellen Taylor. I am a detail-oriented, analytical problem solver with academic experience in data visualization and SQL and real-world experience in cleaning retail product data from multiple suppliers." property="og:description">
+  
+  
+    <meta content="https://htaylor2979.github.io/machine%20learning/2022/03/14/building-a-linear-regression-model-with-gradient-descent-from-scratch.html" property="og:url">
+  
+  
+    <meta content="2022-03-14T12:23:00-04:00" property="article:published_time">
+    <meta content="https://htaylor2979.github.io/about/" property="article:author">
+  
+  
+    <meta content="https://htaylor2979.github.io/assets/img/hellen-taylor-profile-photo.jpg" property="og:image">
+  
+  
+    
+    <meta content="Machine Learning" property="article:section">
+    
+  
+  
+    
+    <meta content="Python" property="article:tag">
+    
+  
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+  
+    <meta name="twitter:title" content="Building a Linear Regression Model with Gradient Descent from Scratch">
+  
+  
+    <meta name="twitter:url" content="https://htaylor2979.github.io/machine%20learning/2022/03/14/building-a-linear-regression-model-with-gradient-descent-from-scratch.html">
+  
+  
+    <meta name="twitter:description" content="You have found the portfolio of Hellen Taylor. I am a detail-oriented, analytical problem solver with academic experience in data visualization and SQL and real-world experience in cleaning retail product data from multiple suppliers.">
+  
+  
+    <meta name="twitter:image:src" content="https://htaylor2979.github.io/assets/img/hellen-taylor-profile-photo.jpg">
+  
+
+	<meta name="description" content="">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta property="og:image" content="">
+	<link rel="shortcut icon" href="/assets/img/favicon/favicon.png" type="image/x-icon">
+	<link rel="apple-touch-icon" href="/assets/img/favicon/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicon/apple-touch-icon-144x144.png">
+	<!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="#263959">
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="#263959">
+	<!-- iOS Safari -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="#263959">
+	<!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap" rel="stylesheet">   
+	<!-- link href="https://fonts.googleapis.com/css?family=PT+Serif:400,700|Lato:300,400,700&display=swap" rel="stylesheet" -->
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="/assets/fonts/font-awesome/css/font-awesome.min.css">
+	<!-- Styles -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+  <!-- Syntax Highlighting Style Sheet -->
+  <link rel="stylesheet" href="/assets/css/syntax-hightlight.css">
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <aside class="sidebar">
+  <header>
+    <div class="about">
+      <div class="cover-author-image">
+        <a href="/"><img src="/assets/img/hellen-taylor-profile-photo.jpg" alt="Hellen Taylor"></a>
+      </div>
+      <div class="author-name">Hellen Taylor</div>
+      <p>Analytical problem solver, creative thinker, data visualizer, fanatical data cleaner, Python coder</p>
+    </div>
+    <div class="nav">
+        <div class="nav-items">
+          <ul>
+            <!-- Categories link -->
+            <li><a href="/categories">Group by Project Categories</a></li>
+            
+            <!-- Ordered by data -->
+            <li><a href="/tags">Group by Software Skills</a></li>
+            
+          </ul>
+        </div>
+    </div>
+  </header> <!-- End Header -->
+  <footer>
+    <section class="contact">
+      <h3 class="contact-title">Contact me</h3>
+      <ul>
+        
+          <li class="github"><a href="http://github.com/htaylor2979" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+        
+          <li class="linkedin"><a href="https://in.linkedin.com/in/htaylor2979" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+        
+          <li class="email"><a href="mailto:htaylor2979@gmail.com"><i class="fa fa-envelope-o"></i></a></li>
+        
+      </ul>
+    </section> <!-- End Section Contact -->
+    <div class="copyright">
+      <p>2022 &copy; Hellen Taylor</p>
+    </div>
+  </footer> <!-- End Footer -->
+</aside> <!-- End Sidebar -->
+<div class="content-box clearfix">
+  <article class="article-page">
+  <div class="page-content">
+    
+    
+
+    <div class="wrap-content">
+      <header class="header-page">
+        <h1 class="page-title">Building a Linear Regression Model with Gradient Descent from Scratch</h1>
+        <div class="page-date"><span>2022, Mar 14&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+      </header>
+      <h2 id="introduction">Introduction</h2>
+<p>The inspiration for this project came from Andrew Ng’s “Machine Learning” course on Coursera.org. The projects for that course used Octave math coding language, which has many similar functions to Python’s Numpy library. With that in mind, I decided to practice what I learned in Professor Ng’s course by building a Logistic Regression model from scratch in Python. I chose a simple gradient descent method for training the model weights and then tested my code with the famous “Iris” dataset that comes packaged with Python’s Scikit Learn library.</p>
+
+<h2 id="skills-demonstrated">Skills Demonstrated</h2>
+<ul>
+  <li>Python Libraries: Numpy, Seaborn, Pandas</li>
+  <li>Logistic Regression coded with vectorized array functions</li>
+  <li>Gradient Descent, also with vectorized array functions</li>
+</ul>
+
+<h2 id="the-data">The Data</h2>
+<p>The first use of the Iris dataset is credited to Sir R.A. Fisher, and the data has frequently been used in demonstrating pattern recognition and classification in machine learning. For this project, I elected to use the version of the data that comes packaged with the Scikit Learn Python library. The target variable is the iris species, with three possible values. It is a small dataset with 150 rows and four features. The observations are divided evenly into 50 rows of each species, and there are no missing values.</p>
+
+<h3 id="data-features">Data Features:</h3>
+<ul>
+  <li>Sepal Length (cm)</li>
+  <li>Sepal Width (cm)</li>
+  <li>Petal Length (cm)</li>
+  <li>Petal Width (cm)</li>
+</ul>
+
+<h3 id="target-variable-species">Target Variable: Species</h3>
+<ul>
+  <li>setosa</li>
+  <li>versicolor</li>
+  <li>virginica</li>
+</ul>
+
+<h3 id="visualizing-the-data">Visualizing the Data</h3>
+<p>The scatter plots below, color-coded by iris species, show the relationships among the variables. In particular, petal length and petal width appear to have a positive linear relationship across the three species. We also see that setosa (green dots) has distinctly different petal and sepal measurements from the other two species. So, at a glance, one would expect the model to perform consistently well on setosa. On the other hand, the measurements for versicolor and virginica (coral and blue dots) overlap in the plots. So, one might expect the model to be somewhat less accurate in classifying these two species.
+<br />
+<br />
+<br /></p>
+
+<p><em>Figure 1: Pair plots comparing the relationships among data features</em>
+<img src="https://htaylor2979.github.io/assets/img/iris-data/pairplot-iris-features.jpg" alt="Pair Plots of Iris Features" />
+<br />
+<br />
+<br /></p>
+
+<h3 id="python-code-for-loading-the-data-and-creating-the-pair-plots">Python Code for Loading the Data and Creating the Pair Plots</h3>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1"># Tables, arrays, and linear algebra
+</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+
+<span class="c1"># Datasets library
+</span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+
+<span class="c1"># Visualize the data
+</span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s">"ticks"</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="c1"># Load the data
+</span><span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+
+<span class="c1"># Create a dataframe and set column labels
+</span><span class="n">iris_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="n">iris_df</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'Sepal Length'</span><span class="p">,</span>
+  <span class="s">'Sepal Width'</span><span class="p">,</span>
+  <span class="s">'Petal Length'</span><span class="p">,</span>
+  <span class="s">'Petal Width'</span><span class="p">]</span>
+<span class="n">iris_df</span><span class="p">[</span><span class="s">'Species Code'</span><span class="p">]</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
+
+<span class="c1"># Map iris species names to a new column
+</span><span class="n">spec_names</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target_names</span>
+<span class="n">iris_df</span><span class="p">[</span><span class="s">'Species Name'</span><span class="p">]</span> <span class="o">=</span> <span class="n">iris_df</span><span class="p">[</span><span class="s">'Species Code'</span><span class="p">]</span><span class="o">.</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">spec_names</span><span class="p">[</span><span class="n">x</span><span class="p">])</span></code></pre></figure>
+
+<p><br />
+<br />
+<br /></p>
+
+<p><em>Figure 2: The first five rows of the Iris dataframe</em>
+<img src="https://htaylor2979.github.io/assets/img/iris-data/iris-dataframe-head.jpg" alt="Iris data first five rows" />
+<br />
+<br />
+<br /></p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1"># Context adjusts the font size and proportions of the graphics
+</span><span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s">"talk"</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">1.4</span><span class="p">)</span>
+
+<span class="c1"># Create the plot
+# Species Code is dropped since it is an integer code for the species name
+</span><span class="n">plot</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">iris_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s">'Species Code'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> 
+             <span class="n">hue</span><span class="o">=</span><span class="s">"Species Name"</span><span class="p">,</span> 
+             <span class="n">palette</span><span class="o">=</span><span class="s">"Set2"</span><span class="p">,</span> 
+             <span class="n">height</span><span class="o">=</span><span class="mf">3.2</span><span class="p">,</span>
+            <span class="n">corner</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></figure>
+
+<p> 
+ </p>
+
+<h2 id="the-model-logistic-regression-with-gradient-descent">The Model: Logistic Regression with Gradient Descent</h2>
+<p>Logistic regression uses the sigmoid function to model values between 0 and 1, which makes it useful for modeling True/False classifications. In this model form, the inputs are an array of X values and a corresponding array of trained weights (also known as coefficients). Equation 1 illustrates the general form of the model in mathematical symbols.</p>
+
+<p>When choosing among multiple classes of the target variable, y, a different set of model weights is trained for each class. After training, probability predictions are made using the weights for all classes and each row of X data. Final predictions are determined by finding the maximum class probability prediction for each row.
+ 
+ </p>
+
+<p><img src="https://htaylor2979.github.io/assets/img/iris-data/sigmoid-function.jpg" alt="Logistic regression sigmoid function" />
+<br />
+<br /></p>
+
+<p><strong>z</strong> can also be written in its expanded form, using <strong>Numpy indexing from zero</strong>:</p>
+
+<p><img src="https://htaylor2979.github.io/assets/img/iris-data/z-function-written-long-ways-descriptive.jpg" alt="z of theta and x written out long ways" />
+<br />
+<br />
+<br /></p>
+
+<p><strong>The variables in the above equation are:</strong></p>
+
+<ul>
+  <li>X = the inputs values (measurements of parts of the iris, in this case)</li>
+  <li>y = the classification of each iris’s species</li>
+  <li>θ = theta, representing an array of weights for each classification</li>
+</ul>
+
+<p><strong>Calculation Notes:</strong></p>
+
+<p>The leftmost (subscripts zero) term is the bias term, and the value of <em>x0</em> in this term is actually “1.” Written in its long form, term-by-term, the equation for z could be written without <em>x0</em>. However, adding a column of ones to the 2D array/matrix X makes the implementation nicer in Numpy. Note that some texts begin indexing at 1. However, I chose to label the equations indexed from 0 to be consistent with the Python code later in this article.</p>
+
+<p>I kept the superscript T (meaning transpose) in the equation for purposes of textbook notation. However, the intention is for each individual x value to be multiplied by its corresponding θ coefficient for all rows of data. During Numpy implementation, I found it simpler to reverse the order of the terms and instead do matrix multiplication of X times θ (not transposed).</p>
+
+<p>Also, while θ is referred to here as model “weights,” it functions similarly to coefficients used in algebra. I have seen notation differ across texts, but the general idea is that X represents multiple x values of the data collected. The θ values are being optimized to produce the smallest amount of error when X values are input into the trained model.</p>
+
+<p><strong>The functions I coded for the Logistic Regression model are:</strong></p>
+
+<ol>
+  <li>Sigmoid function</li>
+  <li>Cost function (a derivative of the sigmoid function)</li>
+  <li>Gradient computation function (derivative of the cost)</li>
+  <li>Gradient descent function to solve for theta</li>
+  <li>Model training function for a binary y array</li>
+  <li>Model training function for y with multiple classes</li>
+  <li>Predict probabilities for all classes</li>
+</ol>
+
+<p>Additional function used: <strong>Numpy’s argmax</strong> function to find the column index for class that has the highest probability for each row</p>
+
+<p><br />
+<br /></p>
+
+<h2 id="python-code-for-the-training-and-testing-the-model">Python Code for the Training and Testing the Model</h2>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1"># Sigmoid Function
+</span><span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">z</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">z</span><span class="p">))</span> </code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1"># COST of Logistic Regression
+</span>
+<span class="c1"># Inputs:
+# X (without bias term) &amp; y
+# theta = weights, as a 2D array
+# lam = regularization term lambda
+# Returns cost (J)
+</span>
+<span class="k">def</span> <span class="nf">lr_cost</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lam</span><span class="p">):</span>
+    
+    <span class="n">J</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Initialize cost
+</span>    <span class="n">m</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># Number of examples/rows
+</span>    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">X</span><span class="p">))</span><span class="c1"># Add ones for the bias theta
+</span>    
+    <span class="c1"># Check for case where a 1D array is passed in
+</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">theta</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> 
+        <span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="c1"># First row of theta is for the bias term
+</span>    <span class="n">theta_reg</span> <span class="o">=</span> <span class="n">theta</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">theta_reg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Set bias term to zero
+</span>    
+    <span class="n">tiny</span> <span class="o">=</span> <span class="mf">.00000001</span> <span class="c1"># a very small value
+</span>        
+    <span class="c1"># Regularization term
+</span>    <span class="n">reg_term</span> <span class="o">=</span> <span class="n">lam</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">theta_reg</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">theta_reg</span><span class="p">)</span>
+    
+    <span class="c1"># Cost
+</span>    <span class="n">log_loss</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">m</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="nb">sum</span><span class="p">(</span>
+        <span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">y</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">X</span> <span class="o">@</span> <span class="n">theta</span><span class="p">)</span> <span class="o">+</span> <span class="n">tiny</span><span class="p">)</span> 
+         <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">X</span> <span class="o">@</span> <span class="n">theta</span><span class="p">)</span><span class="o">+</span> <span class="n">tiny</span><span class="p">)))</span> 
+    
+    <span class="n">J</span> <span class="o">=</span> <span class="n">log_loss</span> <span class="o">+</span> <span class="n">reg_term</span>
+
+    <span class="k">return</span> <span class="n">J</span> </code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1"># GRADIENT of Logistic Regression
+</span>
+<span class="c1"># Inputs:
+# X (without bias term) &amp; y
+# theta = weights, as a 2D array
+# lam = regularization term lambda
+# Returns gradient(grad)
+</span><span class="k">def</span> <span class="nf">lr_gradient</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lam</span><span class="p">):</span>
+    
+    <span class="c1"># Check for cases where a 1D array is passed in
+</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">theta</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> 
+        <span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> 
+        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        
+    <span class="n">m</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># Number of examples/rows
+</span>    <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">theta</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>    <span class="c1"># Initialize gradient   
+</span>    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">X</span><span class="p">))</span><span class="c1"># Add ones for the bias theta
+</span>    
+    <span class="c1"># First row of theta is for the bias term
+</span>    <span class="n">theta_reg</span> <span class="o">=</span> <span class="n">theta</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">theta_reg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Set bias term to zero
+</span>    <span class="n">theta_reg</span> <span class="o">=</span> <span class="n">lam</span><span class="o">/</span><span class="n">m</span> <span class="o">*</span> <span class="n">theta_reg</span>  <span class="c1"># Gradient Regularization term 
+</span>    
+    <span class="c1"># keepdims option tells numpy sum not to flatten the axis of the result
+</span>    <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="nb">sum</span><span class="p">((</span><span class="mi">1</span><span class="o">/</span><span class="n">m</span> <span class="o">*</span> <span class="p">(</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">X</span> <span class="o">@</span> <span class="n">theta</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> 
+                  <span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
+                  <span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="o">+</span> <span class="n">theta_reg</span>
+    
+    <span class="c1">#print(grad)
+</span>    
+    <span class="k">return</span> <span class="n">grad</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1"># GRADIENT DESCENT
+</span><span class="k">def</span> <span class="nf">gradient_desc</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">num_iters</span><span class="p">,</span> <span class="n">alpha</span><span class="p">):</span>
+     
+    <span class="n">m</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># Number of examples/rows
+</span>
+    <span class="c1"># Check for 1D arrays (from using optimizers that flatten arrays)
+</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> 
+        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_iters</span><span class="p">):</span>
+        <span class="n">grad</span> <span class="o">=</span> <span class="n">lr_gradient</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lam</span><span class="p">)</span>
+        <span class="n">J</span> <span class="o">=</span> <span class="n">lr_cost</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lam</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="s">"Iteration: "</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s">"Cost: "</span><span class="p">,</span> <span class="n">J</span><span class="p">)</span>
+            
+        <span class="c1"># update theta
+</span>        <span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">grad</span>
+       
+    <span class="k">return</span> <span class="n">theta</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1"># TRAIN with Binary y
+</span>
+<span class="c1"># Solve for Theta with simple binary y values
+# lam = lamda in regularization terms
+</span><span class="k">def</span> <span class="nf">lr_train</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">num_iters</span><span class="p">,</span> <span class="n">alpha</span><span class="p">):</span>
+    
+    <span class="n">theta_size</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">init_theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">theta_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="mf">.05</span>
+
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">gradient_desc</span><span class="p">(</span><span class="n">init_theta</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">num_iters</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">theta</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1"># TRAIN with Multiple Class y
+</span>
+<span class="c1"># Solves for Theta with multiple classes
+# Returns
+# - all_thetas: 2D array of thetas for ALL classes
+# - class_array: array of class names, indexed same order as thetas
+</span><span class="k">def</span> <span class="nf">lr_train_multi_class</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lam</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_iters</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+
+    <span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">classes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>    
+    
+    <span class="c1"># Initialize 2D array of thetas
+</span>    <span class="n">all_thetas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">classes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">classes</span><span class="p">:</span>
+        
+        <span class="k">print</span><span class="p">(</span><span class="s">"Class: "</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+        <span class="n">yc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span> <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="n">c</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">y</span><span class="p">])</span>
+    
+        <span class="c1"># Train the classifier on each class
+</span>        <span class="n">result</span> <span class="o">=</span> <span class="n">lr_train</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">yc</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">num_iters</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+        
+        <span class="c1"># Append predicted results as a new (row/col?) 
+</span>        <span class="n">all_thetas</span><span class="p">[</span><span class="mi">0</span><span class="p">:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">all_thetas</span><span class="p">,</span> <span class="n">classes</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1"># PREDICT
+# For multi class, each class's theta is a column vector
+</span><span class="k">def</span> <span class="nf">lr_predict_prob_all</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+    
+    <span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">X_ones_col</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="n">m</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+    
+    <span class="c1"># Check for case where a 1D array is passed in
+</span>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">theta</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> 
+        <span class="n">theta</span> <span class="o">=</span> <span class="n">theta</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span>
+    
+    <span class="c1"># Add a column of ones for the bias term in theta
+</span>    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">X_ones_col</span><span class="p">,</span> <span class="n">X</span><span class="p">))</span>
+    
+    <span class="c1"># Predict all probabilities
+</span>    <span class="k">return</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">X</span> <span class="o">@</span> <span class="n">theta</span><span class="p">)</span></code></pre></figure>
+
+<p><br />
+<br /></p>
+
+<h2 id="results">Results</h2>
+<p>To test my code, I trained three models, plus one extra with Scikit Learn’s logistic regression classifier. To keep training results consistent, I used the same lambda, alpha, and number of iterations for all three gradient descent models. I also split the data into 67% training rows and the remaining 33% as test rows. If the dataset had more observations, I would have also liked to split some rows off into a validation set. However, given that the entire dataset had only 150 observations, it seemed impractical to split it further.</p>
+
+<p><strong>Inputs for all three gradient descent models:</strong></p>
+<ul>
+  <li>lambda = 0.9,</li>
+  <li>number of iterations = 1500,</li>
+  <li>alpha = 0.01</li>
+</ul>
+
+<h4 id="model-1-gradient-descent-with-all-features">Model 1: Gradient Descent with All Features</h4>
+<p><strong>92% Accuracy</strong>
+<img src="https://htaylor2979.github.io/assets/img/iris-data/confusion-matrix-model1.png" alt="Model 1 Gradient Descent Confusion Matrix" /></p>
+
+<h4 id="model-2-gradient-descent-with-only-sepal-width-and-petal-width">Model 2: Gradient Descent with Only ‘Sepal Width’ and ‘Petal Width’</h4>
+<p><strong>82% Accuracy</strong>
+<img src="https://htaylor2979.github.io/assets/img/iris-data/confusion-matrix-model2.png" alt="Model 2 Gradient Descent Confusion Matrix" /></p>
+
+<p><br /></p>
+
+<h4 id="model-3-scikit-learns-logistic-regression-with-all-features-default-parameters">Model 3: Scikit Learn’s Logistic Regression with All Features, Default Parameters</h4>
+<p><strong>100% Accuracy</strong>
+<img src="https://htaylor2979.github.io/assets/img/iris-data/confusion-matrix-model3.png" alt="Model 3 Gradient Descent Confusion Matrix" /></p>
+
+<h3 id="model-4-gradient-descent-with-polynomial-terms-all-features">Model 4: Gradient Descent with Polynomial Terms, All Features</h3>
+<p><strong>100% Accuracy</strong>
+<img src="https://htaylor2979.github.io/assets/img/iris-data/confusion-matrix-model4.png" alt="Model 4 Gradient Descent Confusion Matrix" /></p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>All three gradient descent models predicted correctly for the species setosa. This result is consistent with what we saw in the plots during the data visualization step, where setosa was represented by clusters of green dots that had noticeably different measurements from the other two species. The least accurate model (82%) was gradient descent trained with only two features, “Sepal Width” and “Petal Width.” Compare this to Scikit Learn’s logistic regression model, which performed the best at 100% accuracy using the four original features. Gradient descent also predicted the iris species with 100% accuracy when additional features were engineered by squaring the original iris measurements. However, this additional step seems unnecessary when the Scikit Learn model can produce the same accuracy using the unengineered features. So, I would select the Scikit Learn model for its ease of use.</p>
+
+<h4 id="accuracy-of-the-results">Accuracy of the Results</h4>
+<p>Accuracy of 100% would usually be reason to suspect that something was amiss. Perhaps some variation of the target variable had been used as a feature to train the model. However, in this case, the dataset is small and very simple. Furthermore, the plots showed that at least one of the species could be neatly separated based on sepal and petal measurements, with no overlap into the measurements of other species. So, it seems more likely that the data in this case is simply very consistent. For these reasons, I concluded that the models are good, given the limited number of easily separable observations.</p>
+
+<h3 id="references">References</h3>
+<p>Ng, Andrew. <em>Machine Learning</em>. Coursera.org. <a href="http://www.coursera.org/learn/machine-learning" target="_blank">www.coursera.org/learn/machine-learning</a></p>
+
+<p>(1988). <em>Iris</em> [Data set]. Scikit Learn Python Library. <a href="http://scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html" target="_blank">
+scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html</a></p>
+
+      <div class="page-footer">
+        <div class="page-share">
+          <a href="https://twitter.com/intent/tweet?text=Building a Linear Regression Model with Gradient Descent from Scratch&url=https://htaylor2979.github.io/machine%20learning/2022/03/14/building-a-linear-regression-model-with-gradient-descent-from-scratch.html" title="Share on Twitter" rel="nofollow" target="_blank">Twitter</a>
+          <a href="https://facebook.com/sharer.php?u=https://htaylor2979.github.io/machine%20learning/2022/03/14/building-a-linear-regression-model-with-gradient-descent-from-scratch.html" title="Share on Facebook" rel="nofollow" target="_blank">Facebook</a>
+          <a href="https://plus.google.com/share?url=https://htaylor2979.github.io/machine%20learning/2022/03/14/building-a-linear-regression-model-with-gradient-descent-from-scratch.html" title="Share on Google+" rel="nofollow" target="_blank">Google+</a>
+        </div>
+        <div class="page-tag">
+          
+            <a href="/tags#Python" class="tag">&#35; Python</a>
+          
+        </div>
+      </div>
+      <section class="comment-area">
+  <div class="comment-wrapper">
+    
+  </div>
+</section> <!-- End Comment Area -->
+
+    </div> <!-- End Wrap Content -->
+  </div> <!-- End Page Content -->
+</article> <!-- End Article Page -->
+
+</div>
+
+  </div>
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+</script> <!-- End Analytics -->
+
+</body>
+</html>
