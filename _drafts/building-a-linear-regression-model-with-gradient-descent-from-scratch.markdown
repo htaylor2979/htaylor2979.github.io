@@ -37,6 +37,8 @@ The scatter plots below, color coded by iris species, show the relationships amo
 *Figure 1: Pair plots comparing the relationships among data features*
 ![Pair Plots of Iris Features]({{ site.url }}/assets/img/iris-data/pairplot-iris-features.jpg)
 
+
+
 ### Python Code for Loading the Data and Creating the Pair Plots
 
 {% highlight python %}
@@ -71,6 +73,7 @@ iris_df['Species Name'] = iris_df['Species Code'].apply(lambda x: spec_names[x])
 
 *Figure 2: The first five rows of the Iris dataframe*
 ![Iris data first five rows]({{ site.url }}/assets/img/iris-data/iris-dataframe-head.jpg)
+
 
 
 {% highlight python %}
