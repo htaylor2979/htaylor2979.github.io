@@ -322,9 +322,15 @@ def lr_predict_prob_all(theta, X):
 <br />
 
 ## Results
-To test my code, I trained 3 models, plus one extra with Scikit Learn's logistic regression classifier.
+To test my code, I trained three models, plus one extra with Scikit Learn's logistic regression classifier. I also split the data into 67% training rows and the remaining 33% as test rows. If the dataset had more observations, I would have also liked to split some rows off into a validation set. However, given that the entire dataset had only 150 observations, it seemed impractical to split it further.
+
+To keep training results consistent, I used the following inputs for all three gradient descent models:
+* lambda = 0.9, 
+* number of iterations = 1500, 
+* alpha = 0.01
 
 ### Model 1: Gradient Descent with All Features
+![Model 1 Gradient Descent Confusion Matrix]({{ site.url }}/assets/img/iris-data/confusion-matrix-model1.png)
 
 ### Model 2: Gradient Descent with Only 'Sepal Width' and 'Petal Width'
 
