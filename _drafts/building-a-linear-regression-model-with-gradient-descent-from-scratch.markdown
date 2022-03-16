@@ -112,7 +112,7 @@ When choosing among multiple classes of the target variable, y, a different set 
 <br />
 <br />
 
-*z* can also be written in its expanded form as a linear equation:
+*z* can also be written in its expanded form:
 
 ![z of theta and x written out long ways]({{ site.url }}/assets/img/iris-data/z-function-written-long-ways-descriptive.jpg)
 <br />
