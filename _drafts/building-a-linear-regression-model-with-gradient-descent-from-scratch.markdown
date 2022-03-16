@@ -51,9 +51,7 @@ Logistic regression uses the sigmoid function to model values between 0 and 1, w
 
 It is worth noting that, while θ is referred to here as model “weights,” it functions similarly to coefficients used in algebra. Notation differs sometimes, but the general idea is that X represents multiple x-values of the data collected. The θ values are being optimized to produce the smallest amount of error when X values are input into the trained model. 
 
-A trained logistic regression model follows the general form:
-
-*Equation 1: Sigmoid Function*
+*Equation 1: Logistic regression follows the general form:*
 ![General Form of the Sigmoid Function]({{ site.url }}/assets/img/iris-data/sigmoid-function.jpg)
 
 
