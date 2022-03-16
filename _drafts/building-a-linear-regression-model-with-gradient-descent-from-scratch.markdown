@@ -19,13 +19,13 @@ The inspiration for this project came from Andrew Ng’s “Machine Learning” 
 ## The Data
 The first use of the Iris dataset is credited to Sir R.A. Fisher, and the data has frequently been used in demonstrating pattern recognition and classification in machine learning. For this project, I elected to use the version of the data that comes packaged with the Scikit Learn Python library. The target variable is the iris species, with three possible values. It is a small dataset with 150 rows and four features. The observations are divided evenly into 50 rows of each species, and there are no missing values.
 
-#### Data Features:
+### Data Features:
 * Sepal Length (cm) 	
 * Sepal Width (cm) 	
 * Petal Length (cm) 	
 * Petal Width (cm)
 
-#### Target Variable: Species
+### Target Variable: Species
 * setosa
 * versicolor
 * virginica
@@ -43,13 +43,18 @@ Logistic regression uses the sigmoid function to model values between 0 and 1, w
 
 ### Mathematical Representation
 
-** Variables:
+*Variables:*
 
 * X = the inputs values (measurements of parts of the iris, in this case)
 * y = the classification of each iris’s species
 * θ = theta, representing an array of weights for each classification
 
-It is worth noting that, while θ is referred to here as model “weights,” it functions similarly to coefficients used in algebra. The main difference is that in algebra, the goal is usually to solve for the value of x. In machine learning, X represents multiple x-values that are the data already collected. The θ values are the variables that are being optimized to produce the smallest amount of error when X values are input into the trained model. 
+It is worth noting that, while θ is referred to here as model “weights,” it functions similarly to coefficients used in algebra. Notation differs sometimes, but the general idea is that X represents multiple x-values of the data collected. The θ values are being optimized to produce the smallest amount of error when X values are input into the trained model. 
+
+A trained logistic regression model follows the general form:
+*Equation 1: Sigmoid Function*
+![General Form of the Sigmoid Function]({{ site.url }}/assets/img/iris-data/sigmoid-function.jpg)
+
 
 The steps I followed to code my Logistic Regression model were:
 1. Code the sigmoid function
