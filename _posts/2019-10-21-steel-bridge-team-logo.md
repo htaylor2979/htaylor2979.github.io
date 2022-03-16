@@ -1,7 +1,7 @@
 ---
 title: Steel Bridge Team Logo - Spring 2012
 date: 2019-10-20 20:00:00 -04:00
-permalink: steel-bridge-team-logo
+permalink: "/posts/steel-bridge-team-logo"
 categories:
 - Graphic Design
 tags:
