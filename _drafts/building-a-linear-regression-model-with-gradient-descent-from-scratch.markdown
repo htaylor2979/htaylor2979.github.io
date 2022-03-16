@@ -125,11 +125,11 @@ When choosing among multiple classes of the target variable, y, a different set 
 
 **Calculation Notes:**
 
-The first term is the bias term, and the value of x1 in this term is actually "1." Written in its long form, term-by-term, the equation for *z* could be written without *x1*. However, adding a column of ones to the 2D array/matrix X makes the implementation nicer in Numpy. 
+The first term is the bias term, and the value of *x1* in this term is actually "1." Written in its long form, term-by-term, the equation for *z* could be written without *x1*. However, adding a column of ones to the 2D array/matrix *X* makes the implementation nicer in Numpy. 
 
-I kept the superscript T (meaning transpose) in the equation for purposes of correct notation. However, the intention is for each individual X value to be multiplied by its corresponding θ coefficient for all rows of data. During Numpy implementation, I found it simpler to reverse the order of the terms and instead do matrix multiplication of X ** θ.
+I kept the superscript *T* (meaning transpose) in the equation for purposes of correct notation. However, the intention is for each individual *x* value to be multiplied by its corresponding *θ* coefficient for all rows of data. During Numpy implementation, I found it simpler to reverse the order of the terms and instead do matrix multiplication of *X* ** *θ*.
 
-It is worth noting that, while θ is referred to here as model “weights,” it functions similarly to coefficients used in algebra. Notation differs sometimes, but the general idea is that X represents multiple x-values of the data collected. The θ values are being optimized to produce the smallest amount of error when X values are input into the trained model. 
+It is worth noting that, while *θ* is referred to here as model “weights,” it functions similarly to coefficients used in algebra. Notation differs sometimes, but the general idea is that X represents multiple x-values of the data collected. The θ values are being optimized to produce the smallest amount of error when *X* values are input into the trained model. 
 
 **The functions I coded for the Logistic Regression model are:**
 
