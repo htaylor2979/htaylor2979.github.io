@@ -128,7 +128,6 @@ It is worth noting that, while θ is referred to here as model “weights,” it
    * Returns the result of the sigmoid of z
 1. Cost function (a derivative of the sigmoid function)
    * Takes X, y, lambda (regularization coeff.)
-   * Calls the sigmoid function
    * Returns the summation of cost for all rows of X
 1. Gradient computation function (derivative of the cost)
    * Takes X, y, lambda
