@@ -5,6 +5,7 @@ categories:
 - Machine Learning
 tags:
 - Python
+layout: post
 ---
 
 ## Introduction
@@ -357,7 +358,7 @@ All three gradient descent models predicted correctly for the species setosa. Th
 Accuracy of 100% would usually be reason to suspect that something was amiss. Perhaps some variation of the target variable had been used as a feature to train the model. However, in this case, the dataset is small and very simple. Furthermore, the plots showed that at least one of the species could be neatly separated based on sepal and petal measurements, with no overlap into the measurements of other species. So, it seems more likely that the data in this case is simply very consistent. For these reasons, I concluded that the models are good, given the limited number of easily separable observations.
 
 ### References
-Ng, Andrew. *Machine Learning*. Coursera.org. <a href="www.coursera.org/learn/machine-learning" target="_blank">http://www.coursera.org/learn/machine-learning</a>
+Ng, Andrew. *Machine Learning*. Coursera.org. <a href="http://www.coursera.org/learn/machine-learning" target="_blank">www.coursera.org/learn/machine-learning</a>
 
-(1988). *Iris* [Data set]. Scikit Learn Python Library. <a href="scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html" target="_blank">
+(1988). *Iris* [Data set]. Scikit Learn Python Library. <a href="http://scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html" target="_blank">
 scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html</a>
