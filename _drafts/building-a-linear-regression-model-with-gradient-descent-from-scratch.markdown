@@ -121,30 +121,47 @@ The general form of the logistic regression model is a sigmoid function, which r
 
 It is worth noting that, while θ is referred to here as model “weights,” it functions similarly to coefficients used in algebra. Notation differs sometimes, but the general idea is that X represents multiple x-values of the data collected. The θ values are being optimized to produce the smallest amount of error when X values are input into the trained model. 
 
-**The steps I followed to code my Logistic Regression model were:**
+**The functions I coded for the Logistic Regression model are:**
 
-1. Code the sigmoid function
+1. Sigmoid function
    * Takes X, theta
    * Returns the result of the sigmoid of X multiplied by theta
-1. Code the cost function (a derivative of the sigmoid function)
+1. Cost function (a derivative of the sigmoid function)
    * Takes X, y, lambda (regularization coeff.)
    * Calls the sigmoid function
-1. Code the gradient computation function (derivative of the cost)
+1. Gradient computation function (derivative of the cost)
    * Takes X, y, lambda
    * Returns the gradient
-1. Code the gradient descent function to track the optimization of theta
-   * Gradient descent takes X, y, lambda, alpha, number of iterations
-   * Initializes theta as a 2D array
-   * Generates a list of classes in y
-   * For each class in y, for number of iterations:
+1. Gradient descent function to solve for theta
+   * Takes an initial theta, X, y, lambda, alpha, number of iterations
+   * For number of iterations:
       * Calls the cost and gradient functions
+      * Prints the cost after every 100 iterations
       * Multiplies alpha by the gradient
       * Subtracts the product from theta
-      * Prints the cost after every 100 iterations
-   * Ends inner loop when iterations is reached for each class
-   * Assigns the computed class theta to the appropriate column in the initialized array theta
-   * Ends outer loop when theta has been calculated and assigned for each class
-   * Returns theta and the ordered list of classes in y
+      * Updates theta by assigning the subtraction result to theta
+   * Ends loop when number of iterations is reached
+   * Returns the calculated value of theta
+1. Model training function for a binary y array
+   * Takes X, y, lambda, number of iterations, alpha
+   * Initializes theta to an array of ones
+   * Calls gradient descent
+   * Returns the new theta array received from gradient descent
+1. Model training function for y with multiple classes
+   * Takes X, y, lambda, number of iterations, alpha
+   * Initialize a 2D array of all thetas for all classes; each column is for one class
+   * Using Numpy's unique function, create an array of unique class values
+   * Loop through the array of unique values
+   * Call the binary model training function for each class
+   * Assign the returned single column theta array to the appropriate column of the multi-column all thetas array
+   * End loop when theta has been trained and assigned for all classes
+   * Return the all thetas 2D array and the array of classes
+1. Predict probabilities for all classes
+   * Takes the all thetas array and X values for the predictions
+   * Calls the sigmoid function with X and theta multiplied (matrix multiplication)
+   * Returns the result from the sigmoid function
+1. Call Numpy's argmax function to find the column index for class that has the highest probability for each row 
+   
 
 <br />
 <br />
@@ -263,7 +280,6 @@ def gradient_desc(theta, X, y, lam, num_iters, alpha):
 # lam = lamda in regularization terms
 def lr_train(X, y, lam, num_iters, alpha):
     
-    rng = np.random.default_rng()
     theta_size = X.shape[1] + 1
     init_theta = np.ones((theta_size, 1)) + .05
 
