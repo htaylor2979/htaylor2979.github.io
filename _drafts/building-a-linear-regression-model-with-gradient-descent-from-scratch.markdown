@@ -42,7 +42,12 @@ Logistic regression uses the sigmoid function to model values between 0 and 1, w
 
 ### Python Code for the Training and Testing the Model
 
-*Variables:*
+The general form of the logistic regression model is a sigmoid function, which returns values between zero and one:
+
+![Logistic regression sigmoid function]({{ site.url }}/assets/img/iris-data/sigmoid-function.jpg)
+
+
+**The variables in the above equation are:**
 
 * X = the inputs values (measurements of parts of the iris, in this case)
 * y = the classification of each iris’s species
@@ -50,10 +55,8 @@ Logistic regression uses the sigmoid function to model values between 0 and 1, w
 
 It is worth noting that, while θ is referred to here as model “weights,” it functions similarly to coefficients used in algebra. Notation differs sometimes, but the general idea is that X represents multiple x-values of the data collected. The θ values are being optimized to produce the smallest amount of error when X values are input into the trained model. 
 
-The general form of the logistic regression model is a sigmoid function, which returns values between zero and one:
-![Logistic regression sigmoid function]({{ site.url }}/assets/img/iris-data/sigmoid-function.jpg)
+**The steps I followed to code my Logistic Regression model were:**
 
-The steps I followed to code my Logistic Regression model were:
 1. Code the sigmoid function
    * Takes X, theta
    * Returns the result of the sigmoid of X multiplied by theta
