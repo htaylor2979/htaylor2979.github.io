@@ -312,5 +312,13 @@ def lr_predict_prob_all(theta, X):
 <br />
 
 ## Results
+To test my code, I trained 3 models, plus one extra with Scikit Learn's logistic regression classifier.
 
+### Model 1: Gradient Descent with All Features
+
+### Model 2: Gradient Descent with Only 'Sepal Width' and 'Petal Width'
+
+### Model 3: Scikit Learn's Logistic Regression with All Features
+
+### Model 4: Gradient Descent with Polynomial Terms, All Features
 
