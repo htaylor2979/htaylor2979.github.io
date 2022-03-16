@@ -55,12 +55,26 @@ The general form of the logistic regression model is a sigmoid function, which r
 
 The steps I followed to code my Logistic Regression model were:
 1. Code the sigmoid function
-1. Code the cost function
-   * Takes X, y, lambda (regularization coeff.), alpha (controls the size of the learning steps)
-   * Calls the sigmoid function to compute the sigmoid
+   * Takes X, theta
+   * Returns the result of the sigmoid of X multiplied by theta
+1. Code the cost function (a derivative of the sigmoid function)
+   * Takes X, y, lambda (regularization coeff.)
+   * Calls the sigmoid function
 1. Code the gradient computation function (derivative of the cost)
+   * Takes X, y, lambda
+   * Returns the gradient
 1. Code the gradient descent function to track the optimization of theta
-   * Gradient descent takes X
+   * Gradient descent takes X, y, lambda, alpha, number of iterations
+   * Initializes theta
+   * Generates a list of classes in y
+   * Loops through the y classes for number of iterations
+      * Calls the cost and gradient functions
+      * Multiplies alpha by the gradient
+      * Subtracts the product from theta
+      * Prints the cost after every 100 iterations
+   * Ends loop when number of iterations is reached for all classes of y
+   * Returns theta and the ordered list of classes in y
+
 
 
 
