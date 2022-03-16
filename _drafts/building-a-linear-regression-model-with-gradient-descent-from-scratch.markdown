@@ -112,7 +112,7 @@ When choosing among multiple classes of the target variable, y, a different set 
 <br />
 <br />
 
-*z* can also be written in its expanded form:
+**z** can also be written in its expanded form, using **Numpy indexing from zero**:
 
 ![z of theta and x written out long ways]({{ site.url }}/assets/img/iris-data/z-function-written-long-ways-descriptive.jpg)
 <br />
@@ -127,7 +127,7 @@ When choosing among multiple classes of the target variable, y, a different set 
 
 **Calculation Notes:**
 
-The first term is the bias term, and the value of *x1* in this term is actually "1." Written in its long form, term-by-term, the equation for z could be written without *x1*. However, adding a column of ones to the 2D array/matrix X makes the implementation nicer in Numpy. 
+The leftmost (subscripts zero) term is the bias term, and the value of *x0* in this term is actually "1." Written in its long form, term-by-term, the equation for z could be written without *x0*. However, adding a column of ones to the 2D array/matrix X makes the implementation nicer in Numpy. Note that some texts begin indexing at 1. However, I chose to label the equations indexed from 0 to be consistent with the Python code later in this article.
 
 I kept the superscript T (meaning transpose) in the equation for purposes of correct notation. However, the intention is for each individual x value to be multiplied by its corresponding θ coefficient for all rows of data. During Numpy implementation, I found it simpler to reverse the order of the terms and instead do matrix multiplication of X ** θ.
 
