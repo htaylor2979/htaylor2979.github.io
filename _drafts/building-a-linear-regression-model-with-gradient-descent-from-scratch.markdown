@@ -128,24 +128,31 @@ It is worth noting that, while θ is referred to here as model “weights,” it
    * Returns the result of the sigmoid of z
 1. Cost function (a derivative of the sigmoid function)
    * Takes X, y, lambda (regularization coeff.)
+   * Calls the sigmoid function
    * Returns the summation of cost for all rows of X
 1. Gradient computation function (derivative of the cost)
    * Takes X, y, lambda
    * Returns the gradient
 1. Gradient descent function to solve for theta
    * Takes an initial theta, X, y, lambda, alpha, number of iterations
+   * Calls the cost and gradient functions
    * Returns the calculated value of theta
 1. Model training function for a binary y array
    * Takes X, y, lambda, number of iterations, alpha
+   * Calls gradient descent
    * Returns the new theta array received from gradient descent
 1. Model training function for y with multiple classes
    * Takes X, y, lambda, number of iterations, alpha
+   * Initializes a 2D array of thetas for all classes
+   * Calls the binary model training function for each class
+   * Updates the 2D array of initial thetas with appropriate solved thetas
    * Return the all thetas 2D array and the array of classes
 1. Predict probabilities for all classes
    * Takes the all thetas array and X values for the predictions
+   * Calls the sigmoid function
    * Returns the result from the sigmoid function
 
-Additional function used for prediction: *Numpy's argmax* function to find the column index for class that has the highest probability for each row 
+Additional function used Numpy's argmax function to find the column index for class that has the highest probability for each row 
    
 
 <br />
