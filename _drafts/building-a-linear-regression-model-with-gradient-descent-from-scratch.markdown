@@ -70,7 +70,7 @@ It is worth noting that, while θ is referred to here as model “weights,” it
    * Gradient descent takes X, y, lambda, alpha, number of iterations
    * Initializes theta
    * Generates a list of classes in y
-   * Loops through the y classes for number of iterations
+   * For each class in y, for number of iterations:
       * Calls the cost and gradient functions
       * Multiplies alpha by the gradient
       * Subtracts the product from theta
