@@ -129,7 +129,7 @@ When choosing among multiple classes of the target variable, y, a different set 
 
 The leftmost (subscripts zero) term is the bias term, and the value of *x0* in this term is actually "1." Written in its long form, term-by-term, the equation for z could be written without *x0*. However, adding a column of ones to the 2D array/matrix X makes the implementation nicer in Numpy. Note that some texts begin indexing at 1. However, I chose to label the equations indexed from 0 to be consistent with the Python code later in this article.
 
-I kept the superscript T (meaning transpose) in the equation for purposes of correct notation. However, the intention is for each individual x value to be multiplied by its corresponding θ coefficient for all rows of data. During Numpy implementation, I found it simpler to reverse the order of the terms and instead do matrix multiplication of X ** θ.
+I kept the superscript T (meaning transpose) in the equation for purposes of textbook notation. However, the intention is for each individual x value to be multiplied by its corresponding θ coefficient for all rows of data. During Numpy implementation, I found it simpler to reverse the order of the terms and instead do matrix multiplication of X times θ (not transposed).
 
 Also, while θ is referred to here as model “weights,” it functions similarly to coefficients used in algebra. I have seen notation differ across texts, but the general idea is that X represents multiple x values of the data collected. The θ values are being optimized to produce the smallest amount of error when X values are input into the trained model. 
 
