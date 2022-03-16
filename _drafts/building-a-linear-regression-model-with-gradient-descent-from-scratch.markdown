@@ -40,8 +40,6 @@ The scatter plots below, color coded by iris species, show the relationships amo
 ## The Model: Logistic Regression with Gradient Descent
 Logistic regression uses the sigmoid function to model values between 0 and 1, which makes it useful for modeling True/False classifications. When choosing among multiple options, a different model is trained for each target value, and the results of each model are then compared to determine how best to classify each observation in the data.
 
-
-
 ### Python Code for the Training and Testing the Model
 
 *Variables:*
@@ -51,6 +49,9 @@ Logistic regression uses the sigmoid function to model values between 0 and 1, w
 * θ = theta, representing an array of weights for each classification
 
 It is worth noting that, while θ is referred to here as model “weights,” it functions similarly to coefficients used in algebra. Notation differs sometimes, but the general idea is that X represents multiple x-values of the data collected. The θ values are being optimized to produce the smallest amount of error when X values are input into the trained model. 
+
+The general form of the logistic regression model is a sigmoid function, which returns values between zero and one:
+![Logistic regression sigmoid function]({{ site.url }}/assets/img/iris-data/sigmoid-function.jpg)
 
 The steps I followed to code my Logistic Regression model were:
 1. Code the sigmoid function
