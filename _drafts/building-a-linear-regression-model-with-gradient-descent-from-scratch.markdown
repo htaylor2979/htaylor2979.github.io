@@ -77,16 +77,16 @@ iris_df['Species Name'] = iris_df['Species Code'].apply(lambda x: spec_names[x])
 
 
 {% highlight python %}
-# Create Pair Plots
+# Context adjusts the font size and proportions of the graphics
 sns.set_context("talk", font_scale=1.4)
 
+# Create the plot
+# Species Code is dropped since it is an integer code for the species name
 plot = sns.pairplot(iris_df.drop('Species Code', axis=1), 
              hue="Species Name", 
              palette="Set2", 
              height=3.2,
             corner=True)
-
-plt.legend(loc='upper right')
 
 plt.show()
 {% endhighlight %}
