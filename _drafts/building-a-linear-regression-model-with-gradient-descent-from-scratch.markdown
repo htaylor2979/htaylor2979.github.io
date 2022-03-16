@@ -126,6 +126,16 @@ It is worth noting that, while θ is referred to here as model “weights,” it
 1. Sigmoid function
    * Takes X, theta
    * Returns the result of the sigmoid of X multiplied by theta
+
+
+{% highlight python %}
+# Sigmoid Function
+def sigmoid(z):
+    return 1 / (1 + np.exp(-1 * z)) 
+{% endhighlight %}
+
+
+
 1. Cost function (a derivative of the sigmoid function)
    * Takes X, y, lambda (regularization coeff.)
    * Calls the sigmoid function
@@ -169,12 +179,6 @@ It is worth noting that, while θ is referred to here as model “weights,” it
 
 ### Python Code for the Training and Testing the Model
 
-
-{% highlight python %}
-# Sigmoid Function
-def sigmoid(z):
-    return 1 / (1 + np.exp(-1 * z)) 
-{% endhighlight %}
 
 
 {% highlight python %}
