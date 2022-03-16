@@ -124,53 +124,29 @@ It is worth noting that, while θ is referred to here as model “weights,” it
 **The functions I coded for the Logistic Regression model are:**
 
 1. Sigmoid function
-   * Takes X, theta
-   * Returns the result of the sigmoid of X multiplied by theta
-
-
-{% highlight python %}
-# Sigmoid Function
-def sigmoid(z):
-    return 1 / (1 + np.exp(-1 * z)) 
-{% endhighlight %}
-
-
-
+   * Takes some value z
+   * Returns the result of the sigmoid of z
 1. Cost function (a derivative of the sigmoid function)
    * Takes X, y, lambda (regularization coeff.)
    * Calls the sigmoid function
+   * Returns the summation of cost for all rows of X
 1. Gradient computation function (derivative of the cost)
    * Takes X, y, lambda
    * Returns the gradient
 1. Gradient descent function to solve for theta
    * Takes an initial theta, X, y, lambda, alpha, number of iterations
-   * For number of iterations:
-      * Calls the cost and gradient functions
-      * Prints the cost after every 100 iterations
-      * Multiplies alpha by the gradient
-      * Subtracts the product from theta
-      * Updates theta by assigning the subtraction result to theta
-   * Ends loop when number of iterations is reached
    * Returns the calculated value of theta
 1. Model training function for a binary y array
    * Takes X, y, lambda, number of iterations, alpha
-   * Initializes theta to an array of ones
-   * Calls gradient descent
    * Returns the new theta array received from gradient descent
 1. Model training function for y with multiple classes
    * Takes X, y, lambda, number of iterations, alpha
-   * Initialize a 2D array of all thetas for all classes; each column is for one class
-   * Using Numpy's unique function, create an array of unique class values
-   * Loop through the array of unique values
-   * Call the binary model training function for each class
-   * Assign the returned single column theta array to the appropriate column of the multi-column all thetas array
-   * End loop when theta has been trained and assigned for all classes
    * Return the all thetas 2D array and the array of classes
 1. Predict probabilities for all classes
    * Takes the all thetas array and X values for the predictions
-   * Calls the sigmoid function with X and theta multiplied (matrix multiplication)
    * Returns the result from the sigmoid function
-1. Call Numpy's argmax function to find the column index for class that has the highest probability for each row 
+
+Additional function used for prediction: *Numpy's argmax* function to find the column index for class that has the highest probability for each row 
    
 
 <br />
@@ -179,6 +155,12 @@ def sigmoid(z):
 
 ### Python Code for the Training and Testing the Model
 
+
+{% highlight python %}
+# Sigmoid Function
+def sigmoid(z):
+    return 1 / (1 + np.exp(-1 * z)) 
+{% endhighlight %}
 
 
 {% highlight python %}
