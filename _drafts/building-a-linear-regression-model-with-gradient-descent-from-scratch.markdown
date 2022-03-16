@@ -198,5 +198,130 @@ def lr_cost(theta, X, y, lam):
     return J 
 {% endhighlight %}
 
+{% highlight python %}
+# GRADIENT of Logistic Regression
+
+# Inputs:
+# X (without bias term) & y
+# theta = weights, as a 2D array
+# lam = regularization term lambda
+# Returns gradient(grad)
+def lr_gradient(theta, X, y, lam):
+    
+    # Check for cases where a 1D array is passed in
+    if len(theta.shape) == 1: 
+        theta = theta.reshape((len(theta), 1)).copy()
+    
+    if len(y.shape) == 1: 
+        y = y.reshape((len(y), 1)).copy()
+        
+    m = X.shape[0] # Number of examples/rows
+    grad = np.zeros(theta.shape)    # Initialize gradient   
+    X = np.hstack((np.ones((1, m)).T, X))# Add ones for the bias theta
+    
+    # First row of theta is for the bias term
+    theta_reg = theta.copy()
+    theta_reg[0] = 0  # Set bias term to zero
+    theta_reg = lam/m * theta_reg  # Gradient Regularization term 
+    
+    # keepdims option tells numpy sum not to flatten the axis of the result
+    grad = np.sum((1/m * (sigmoid(X @ theta) - y) * X).T 
+                  , axis=1
+                  , keepdims=True) + theta_reg
+    
+    #print(grad)
+    
+    return grad
+{% endhighlight %}
+
+{% highlight python %}
+# GRADIENT DESCENT
+def gradient_desc(theta, X, y, lam, num_iters, alpha):
+     
+    m = X.shape[0] # Number of examples/rows
+
+    # Check for 1D arrays (from using optimizers that flatten arrays)
+    if len(y.shape) == 1: 
+        y = y.reshape((len(y), 1)).copy()
+    
+    for i in range(num_iters):
+        grad = lr_gradient(theta, X, y, lam)
+        J = lr_cost(theta, X, y, lam)
+        
+        if i%100 == 0: print("Iteration: ", i, "Cost: ", J)
+            
+        # update theta
+        theta = theta - alpha * grad
+       
+    return theta
+{% endhighlight %}
+
+{% highlight python %}
+# TRAIN with Binary y
+
+# Solve for Theta with simple binary y values
+# lam = lamda in regularization terms
+def lr_train(X, y, lam, num_iters, alpha):
+    
+    rng = np.random.default_rng()
+    theta_size = X.shape[1] + 1
+    init_theta = np.ones((theta_size, 1)) + .05
+
+    theta = gradient_desc(init_theta, X, y, lam, num_iters, alpha)
+    
+    return theta
+{% endhighlight %}
+
+{% highlight python %}
+# TRAIN with Multiple Class y
+
+# Solves for Theta with multiple classes
+# Returns
+# - all_thetas: 2D array of thetas for ALL classes
+# - class_array: array of class names, indexed same order as thetas
+def lr_train_multi_class(X, y, lam=1, num_iters=1000, alpha=0.1):
+
+    (m, n) = X.shape
+    classes = np.unique(y)    
+    
+    # Initialize 2D array of thetas
+    all_thetas = np.ones((n + 1, classes.shape[0]))
+    
+    i = 0
+    for c in classes:
+        
+        print("Class: ", c)
+        yc = np.array([1 if y == c else 0 for y in y])
+    
+        # Train the classifier on each class
+        result = lr_train(X, yc, lam, num_iters, alpha)
+        
+        # Append predicted results as a new (row/col?) 
+        all_thetas[0:, i] = result.flatten()
+
+        i += 1
+
+    return all_thetas, classes
+{% endhighlight %}
+
+{% highlight python %}
+# PREDICT
+# For multi class, each class's theta is a column vector
+def lr_predict_prob_all(theta, X):
+    
+    (m, n) = X.shape
+    X_ones_col = np.ones((1,m)).T
+    
+    # Check for case where a 1D array is passed in
+    if len(theta.shape) == 1: 
+        theta = theta.reshape((len(theta), 1))
+    
+    # Add a column of ones for the bias term in theta
+    X = np.hstack((X_ones_col, X))
+    
+    # Predict all probabilities
+    return sigmoid(X @ theta)
+{% endhighlight %}
+
 
 
