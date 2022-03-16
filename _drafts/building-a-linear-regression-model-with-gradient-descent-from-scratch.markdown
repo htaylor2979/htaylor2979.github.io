@@ -136,7 +136,7 @@ Additional function used: **Numpy's argmax** function to find the column index f
 <br />
 <br />
 
-### Python Code for the Training and Testing the Model
+## Python Code for the Training and Testing the Model
 
 
 {% highlight python %}
