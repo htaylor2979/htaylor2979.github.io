@@ -40,8 +40,7 @@ The scatter plots below, color coded by iris species, show the relationships amo
 ## The Model: Logistic Regression with Gradient Descent
 Logistic regression uses the sigmoid function to model values between 0 and 1, which makes it useful for modeling True/False classifications. When choosing among multiple options, a different model is trained for each target value, and the results of each model are then compared to determine how best to classify each observation in the data.
 
-
-### Mathematical Representation
+### Python Code for the Training and Testing the Model
 
 *Variables:*
 
@@ -51,23 +50,31 @@ Logistic regression uses the sigmoid function to model values between 0 and 1, w
 
 It is worth noting that, while θ is referred to here as model “weights,” it functions similarly to coefficients used in algebra. Notation differs sometimes, but the general idea is that X represents multiple x-values of the data collected. The θ values are being optimized to produce the smallest amount of error when X values are input into the trained model. 
 
-*Equation 1: Logistic regression follows the general form:*
-![General Form of the Sigmoid Function]({{ site.url }}/assets/img/iris-data/sigmoid-function.jpg)
-
-
-*Equation 2: Cost of the logistic regression follows the general form:*
-![General Form of the Sigmoid Function]({{ site.url }}/assets/img/iris-data/cost-function-if-y-is-one.jpg)
-
-Source: Ng, Andrew. *Machine Learning: Lecture 6 Notes* [Coursera online course]. Stanford University. www.coursera.org/learn/machine-learning
+The general form of the logistic regression model is a sigmoid function, which returns values between zero and one:
+![Logistic regression sigmoid function]({{ site.url }}/assets/img/iris-data/sigmoid-function.jpg)
 
 The steps I followed to code my Logistic Regression model were:
 1. Code the sigmoid function
-1. Code the cost function
-   * Takes X, y, lambda (regularization coeff.), alpha (controls the size of the learning steps)
-   * Calls the sigmoid function to compute the sigmoid
+   * Takes X, theta
+   * Returns the result of the sigmoid of X multiplied by theta
+1. Code the cost function (a derivative of the sigmoid function)
+   * Takes X, y, lambda (regularization coeff.)
+   * Calls the sigmoid function
 1. Code the gradient computation function (derivative of the cost)
+   * Takes X, y, lambda
+   * Returns the gradient
 1. Code the gradient descent function to track the optimization of theta
-   * Gradient descent takes X
+   * Gradient descent takes X, y, lambda, alpha, number of iterations
+   * Initializes theta
+   * Generates a list of classes in y
+   * Loops through the y classes for number of iterations
+      * Calls the cost and gradient functions
+      * Multiplies alpha by the gradient
+      * Subtracts the product from theta
+      * Prints the cost after every 100 iterations
+   * Ends loop when number of iterations is reached for all classes of y
+   * Returns theta and the ordered list of classes in y
+
 
 
 
