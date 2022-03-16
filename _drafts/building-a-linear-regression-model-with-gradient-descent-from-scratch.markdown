@@ -82,8 +82,7 @@ It is worth noting that, while θ is referred to here as model “weights,” it
 
 
 
-
---- python
+{% highlight python %}
 # Load a sample dataset
 from sklearn import datasets
 
@@ -93,6 +92,5 @@ sns.set_theme(style="ticks")
 import matplotlib.pyplot as plt
 
 iris = datasets.load_iris()
-
----
+{% endhighlight %}
 
