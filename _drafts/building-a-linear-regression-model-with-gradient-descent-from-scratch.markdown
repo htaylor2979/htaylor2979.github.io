@@ -44,7 +44,7 @@ The scatter plots below, color coded by iris species, show the relationships amo
 import numpy as np
 import pandas as pd
 
-# Load a sample dataset
+# Datasets library
 from sklearn import datasets
 
 # Visualize the data
@@ -52,8 +52,10 @@ import seaborn as sns
 sns.set_theme(style="ticks")
 import matplotlib.pyplot as plt
 
+# Load the data
 iris = datasets.load_iris()
 
+# Create a dataframe and set column labels
 iris_df = pd.DataFrame(iris.data)
 iris_df.columns=['Sepal Length',
   'Sepal Width',
@@ -66,8 +68,25 @@ spec_names = iris.target_names
 iris_df['Species Name'] = iris_df['Species Code'].apply(lambda x: spec_names[x])
 {% endhighlight %}
 
+
 *Figure 2: The first five rows of the Iris dataframe*
 ![Iris data first five rows]({{ site.url }}/assets/img/iris-data/iris-dataframe-head.jpg)
+
+
+{% highlight python %}
+# Create Pair Plots
+sns.set_context("talk", font_scale=1.4)
+
+plot = sns.pairplot(iris_df.drop('Species Code', axis=1), 
+             hue="Species Name", 
+             palette="Set2", 
+             height=3.2,
+            corner=True)
+
+plt.legend(loc='upper right')
+
+plt.show()
+{% endhighlight %}
 
 
 ## The Model: Logistic Regression with Gradient Descent
