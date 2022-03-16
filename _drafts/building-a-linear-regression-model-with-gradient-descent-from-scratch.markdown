@@ -102,9 +102,9 @@ plt.show()
 &nbsp;
 
 ## The Model: Logistic Regression with Gradient Descent
-Logistic regression uses the sigmoid function to model values between 0 and 1, which makes it useful for modeling True/False classifications. When choosing among multiple options, a different model is trained for each target value, and the results of each model are then compared to determine how best to classify each observation in the data.
+Logistic regression uses the sigmoid function to model values between 0 and 1, which makes it useful for modeling True/False classifications. In this model form, the inputs are an array of X values and a corresponding array of trained weights (also known as coefficients). Equation 1 illustrates the general form of the model in mathematical symbols. 
 
-The general form of the logistic regression model is a sigmoid function, which returns values between zero and one:
+When choosing among multiple classes of the target variable, y, a different set of model weights is trained for each class. After training, probability predictions are made using the weights for all classes and each row of X data. Final predictions are determined by finding the maximum class probability prediction for each row.
 &nbsp;
 &nbsp;
 
