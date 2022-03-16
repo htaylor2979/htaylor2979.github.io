@@ -129,7 +129,7 @@ The first term is the bias term, and the value of *x1* in this term is actually 
 
 I kept the superscript T (meaning transpose) in the equation for purposes of correct notation. However, the intention is for each individual x value to be multiplied by its corresponding θ coefficient for all rows of data. During Numpy implementation, I found it simpler to reverse the order of the terms and instead do matrix multiplication of X ** θ.
 
-Also, while θ is referred to here as model “weights,” it functions similarly to coefficients used in algebra. I have seen notation differ across texts, but the general idea is that X represents multiple x-values of the data collected. The θ values are being optimized to produce the smallest amount of error when X values are input into the trained model. 
+Also, while θ is referred to here as model “weights,” it functions similarly to coefficients used in algebra. I have seen notation differ across texts, but the general idea is that X represents multiple x values of the data collected. The θ values are being optimized to produce the smallest amount of error when X values are input into the trained model. 
 
 **The functions I coded for the Logistic Regression model are:**
 
