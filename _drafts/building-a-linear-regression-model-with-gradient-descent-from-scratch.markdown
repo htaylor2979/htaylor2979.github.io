@@ -37,12 +37,61 @@ The scatter plots below, color coded by iris species, show the relationships amo
 *Figure 1: Pair plots comparing the relationships among data features*
 ![Pair Plots of Iris Features]({{ site.url }}/assets/img/iris-data/pairplot-iris-features.jpg)
 
+### Python Code for Loading the Data and Creating the Pair Plots
+
+{% highlight python %}
+# Sigmoid Function
+def sigmoid(z):
+    return 1 / (1 + np.exp(-1 * z)) 
+{% endhighlight %}
+
+{% highlight python %}
+# COST of Logistic Regression
+
+# Inputs:
+# X (without bias term) & y
+# theta = weights, as a 2D array
+# lam = regularization term lambda
+# Returns cost (J)
+
+def lr_cost(theta, X, y, lam):
+    
+    J = 0  # Initialize cost
+    m = X.shape[0] # Number of examples/rows
+    X = np.hstack((np.ones((1, m)).T, X))# Add ones for the bias theta
+    
+    # Check for case where a 1D array is passed in
+    if len(theta.shape) == 1: 
+        theta = theta.reshape((len(theta), 1))
+
+    # First row of theta is for the bias term
+    theta_reg = theta.copy()
+    theta_reg[0] = 0  # Set bias term to zero
+    
+    tiny = .00000001 # a very small value
+        
+    # Regularization term
+    reg_term = lam/(2 * m) * (theta_reg.T @ theta_reg)
+    
+    # Cost
+    log_loss = 1/m * np.sum(
+        (-1 * y * np.log(sigmoid(X @ theta) + tiny) 
+         - (1 - y) * np.log(1 - sigmoid(X @ theta)+ tiny))) 
+    
+    J = log_loss + reg_term
+
+    return J 
+{% endhighlight %}
+
 ## The Model: Logistic Regression with Gradient Descent
 Logistic regression uses the sigmoid function to model values between 0 and 1, which makes it useful for modeling True/False classifications. When choosing among multiple options, a different model is trained for each target value, and the results of each model are then compared to determine how best to classify each observation in the data.
 
-### Python Code for the Training and Testing the Model
+The general form of the logistic regression model is a sigmoid function, which returns values between zero and one:
 
-*Variables:*
+![Logistic regression sigmoid function]({{ site.url }}/assets/img/iris-data/sigmoid-function.jpg)
+
+
+**The variables in the above equation are:**
 
 * X = the inputs values (measurements of parts of the iris, in this case)
 * y = the classification of each iris’s species
@@ -50,10 +99,8 @@ Logistic regression uses the sigmoid function to model values between 0 and 1, w
 
 It is worth noting that, while θ is referred to here as model “weights,” it functions similarly to coefficients used in algebra. Notation differs sometimes, but the general idea is that X represents multiple x-values of the data collected. The θ values are being optimized to produce the smallest amount of error when X values are input into the trained model. 
 
-The general form of the logistic regression model is a sigmoid function, which returns values between zero and one:
-![Logistic regression sigmoid function]({{ site.url }}/assets/img/iris-data/sigmoid-function.jpg)
+**The steps I followed to code my Logistic Regression model were:**
 
-The steps I followed to code my Logistic Regression model were:
 1. Code the sigmoid function
    * Takes X, theta
    * Returns the result of the sigmoid of X multiplied by theta
@@ -65,31 +112,21 @@ The steps I followed to code my Logistic Regression model were:
    * Returns the gradient
 1. Code the gradient descent function to track the optimization of theta
    * Gradient descent takes X, y, lambda, alpha, number of iterations
-   * Initializes theta
+   * Initializes theta as a 2D array
    * Generates a list of classes in y
-   * Loops through the y classes for number of iterations
+   * For each class in y, for number of iterations:
       * Calls the cost and gradient functions
       * Multiplies alpha by the gradient
       * Subtracts the product from theta
       * Prints the cost after every 100 iterations
-   * Ends loop when number of iterations is reached for all classes of y
+   * Ends inner loop when iterations is reached for each class
+   * Assigns the computed class theta to the appropriate column in the initialized array theta
+   * Ends outer loop when theta has been calculated and assigned for each class
    * Returns theta and the ordered list of classes in y
 
 
+### Python Code for the Training and Testing the Model
 
 
-
-
---- python
-# Load a sample dataset
-from sklearn import datasets
-
-# Visualize the data
-import seaborn as sns
-sns.set_theme(style="ticks")
-import matplotlib.pyplot as plt
-
-iris = datasets.load_iris()
-
----
+{% endhighlight %}
 
