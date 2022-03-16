@@ -333,18 +333,22 @@ To test my code, I trained three models, plus one extra with Scikit Learn's logi
 
 #### Model 1: Gradient Descent with All Features 
 ***92% Accuracy***
+
 ![Model 1 Gradient Descent Confusion Matrix]({{ site.url }}/assets/img/iris-data/confusion-matrix-model1.png)
 
 #### Model 2: Gradient Descent with Only 'Sepal Width' and 'Petal Width'
 ***82% Accuracy***
+
 ![Model 2 Gradient Descent Confusion Matrix]({{ site.url }}/assets/img/iris-data/confusion-matrix-model2.png)
 
 #### Model 3: Scikit Learn's Logistic Regression with All Features, Default Parameters
 ***100% Accuracy***
+
 ![Model 3 Gradient Descent Confusion Matrix]({{ site.url }}/assets/img/iris-data/confusion-matrix-model3.png)
 
 ### Model 4: Gradient Descent with Polynomial Terms, All Features
 ***100% Accuracy***
+
 ![Model 4 Gradient Descent Confusion Matrix]({{ site.url }}/assets/img/iris-data/confusion-matrix-model4.png)
 
 
