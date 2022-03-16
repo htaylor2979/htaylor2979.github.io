@@ -68,14 +68,16 @@ It is worth noting that, while θ is referred to here as model “weights,” it
    * Returns the gradient
 1. Code the gradient descent function to track the optimization of theta
    * Gradient descent takes X, y, lambda, alpha, number of iterations
-   * Initializes theta
+   * Initializes theta as a 2D array
    * Generates a list of classes in y
    * For each class in y, for number of iterations:
       * Calls the cost and gradient functions
       * Multiplies alpha by the gradient
       * Subtracts the product from theta
       * Prints the cost after every 100 iterations
-   * Ends loop when number of iterations is reached for all classes of y
+   * Ends inner loop when iterations is reached for each class
+   * Assigns the computed class theta to the appropriate column in the initialized array theta
+   * Ends outer loop when theta has been calculated and assigned for each class
    * Returns theta and the ordered list of classes in y
 
 
