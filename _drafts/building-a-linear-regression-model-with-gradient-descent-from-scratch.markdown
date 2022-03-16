@@ -112,6 +112,8 @@ When choosing among multiple classes of the target variable, y, a different set 
 <br />
 <br />
 
+*z* can also be written in its expanded form:
+
 ![z of theta and x written out long ways]({{ site.url }}/assets/img/iris-data/z-function-written-long-ways-descriptive.jpg)
 <br />
 <br />
@@ -322,19 +324,22 @@ def lr_predict_prob_all(theta, X):
 <br />
 
 ## Results
-To test my code, I trained three models, plus one extra with Scikit Learn's logistic regression classifier. I also split the data into 67% training rows and the remaining 33% as test rows. If the dataset had more observations, I would have also liked to split some rows off into a validation set. However, given that the entire dataset had only 150 observations, it seemed impractical to split it further.
+To test my code, I trained three models, plus one extra with Scikit Learn's logistic regression classifier. To keep training results consistent, I used the same lambda, alpha, and number of iteration for all three gradient descent modelsI also split the data into 67% training rows and the remaining 33% as test rows. If the dataset had more observations, I would have also liked to split some rows off into a validation set. However, given that the entire dataset had only 150 observations, it seemed impractical to split it further.
 
-To keep training results consistent, I used the following inputs for all three gradient descent models:
+**Inputs for all three gradient descent models:**
 * lambda = 0.9, 
 * number of iterations = 1500, 
 * alpha = 0.01
 
-### Model 1: Gradient Descent with All Features
+#### Model 1: Gradient Descent with All Features
 ![Model 1 Gradient Descent Confusion Matrix]({{ site.url }}/assets/img/iris-data/confusion-matrix-model1.png)
 
-### Model 2: Gradient Descent with Only 'Sepal Width' and 'Petal Width'
+#### Model 2: Gradient Descent with Only 'Sepal Width' and 'Petal Width'
+![Model 2 Gradient Descent Confusion Matrix]({{ site.url }}/assets/img/iris-data/confusion-matrix-model2.png)
 
-### Model 3: Scikit Learn's Logistic Regression with All Features
+#### Model 3: Scikit Learn's Logistic Regression with All Features, Default Parameters
+![Model 3 Gradient Descent Confusion Matrix]({{ site.url }}/assets/img/iris-data/confusion-matrix-model3.png)
 
 ### Model 4: Gradient Descent with Polynomial Terms, All Features
+![Model 4 Gradient Descent Confusion Matrix]({{ site.url }}/assets/img/iris-data/confusion-matrix-model4.png)
 
