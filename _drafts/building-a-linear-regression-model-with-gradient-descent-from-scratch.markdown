@@ -31,10 +31,48 @@ The first use of the Iris dataset is credited to Sir R.A. Fisher, and the data h
 * virginica
 
 ### Visualizing the Data
-The scatter plots below, color coded by iris species, show the relationships among the variables. In particular, petal length and petal width appear to have a positive linear relationship across the three species. We also see that the setosa species (green dots) has distinctly different petal and sepal measurements from the other two species. So, at a glance, one would expect the model to perform consistently well on setosa. On the other hand, the measurements for versicolor and virginica (coral and blue dots) overlap in plots. So, one might expect the model to be somewhat less accurate in classifying these two species.
+The scatter plots below, color coded by iris species, show the relationships among the variables. In particular, petal length and petal width appear to have a positive linear relationship across the three species. We also see that the setosa species (green dots) has distinctly different petal and sepal measurements from the other two species. So, at a glance, one would expect the model to perform consistently well on setosa. On the other hand, the measurements for versicolor and virginica (coral and blue dots) overlap in the plots. So, one might expect the model to be somewhat less accurate in classifying these two species.
 
 
 *Figure 1: Pair plots comparing the relationships among data features*
 ![Pair Plots of Iris Features]({{ site.url }}/assets/img/iris-data/pairplot-iris-features.jpg)
 
+## The Model: Logistic Regression with Gradient Descent
+Logistic regression uses the sigmoid function to model values between 0 and 1, which makes it useful for modeling True/False classifications. When choosing among multiple options, a different model is trained for each target value, and the results of each model are then compared to determine how best to classify each observation in the data.
+
+Mathematically, the process can be represented by the following steps:
+
+Variables:
+
+X = the inputs values (measurements of parts of the iris, in this case)
+y = the classification of each iris’s species
+θ = theta, representing an array of weights for each classification
+
+It is worth noting that, while θ is referred to here as model “weights,” it functions similarly to coefficients used in algebra. The main difference is that in algebra, the goal is usually to solve for the value of x. In machine learning, X represents multiple x-values that are the data already collected. The θ values are the variables that are being optimized to produce the smallest amount of error when X values are input into the trained model. 
+
+The steps I followed to code my Logistic Regression model were:
+1. 1. Code the sigmoid function
+1. Code the cost function
+   * Takes X, y, lambda (regularization coeff.), alpha (controls the size of the learning steps)
+   * Calls the sigmoid function to compute the sig
+1. Code the gradient computation function (derivative of the cost)
+1. Code the gradient descent function to track the optimization of theta
+   * Gradient descent takes X
+
+
+
+
+
+---python
+# Load a sample dataset
+from sklearn import datasets
+
+# Visualize the data
+import seaborn as sns
+sns.set_theme(style="ticks")
+import matplotlib.pyplot as plt
+
+iris = datasets.load_iris()
+
+---
 
