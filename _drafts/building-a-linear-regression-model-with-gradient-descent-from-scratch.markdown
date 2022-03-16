@@ -56,7 +56,7 @@ It is worth noting that, while θ is referred to here as model “weights,” it
 
 
 *Equation 2: Cost of the logistic regression follows the general form:*
-![General Form of the Sigmoid Function]({{ site.url }}/assets/img/iris-data/cost-if-y-is-one.jpg)
+![General Form of the Sigmoid Function]({{ site.url }}/assets/img/iris-data/cost-function-if-y-is-one.jpg)
 
 Source: Ng, Andrew. *Machine Learning: Lecture 6 Notes* [Coursera online course]. Stanford University. www.coursera.org/learn/machine-learning
 
