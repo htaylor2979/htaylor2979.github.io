@@ -102,13 +102,17 @@ plt.show()
 &nbsp;
 
 ## The Model: Logistic Regression with Gradient Descent
-Logistic regression uses the sigmoid function to model values between 0 and 1, which makes it useful for modeling True/False classifications. When choosing among multiple options, a different model is trained for each target value, and the results of each model are then compared to determine how best to classify each observation in the data.
+Logistic regression uses the sigmoid function to model values between 0 and 1, which makes it useful for modeling True/False classifications. In this model form, the inputs are an array of X values and a corresponding array of trained weights (also known as coefficients). Equation 1 illustrates the general form of the model in mathematical symbols. 
 
-The general form of the logistic regression model is a sigmoid function, which returns values between zero and one:
+When choosing among multiple classes of the target variable, y, a different set of model weights is trained for each class. After training, probability predictions are made using the weights for all classes and each row of X data. Final predictions are determined by finding the maximum class probability prediction for each row.
 &nbsp;
 &nbsp;
 
 ![Logistic regression sigmoid function]({{ site.url }}/assets/img/iris-data/sigmoid-function.jpg)
+<br />
+<br />
+
+![z of theta and x written out long ways]({{ site.url }}/assets/img/iris-data/z-function-written-long-ways-descriptive.jpg)
 <br />
 <br />
 <br />
@@ -118,6 +122,12 @@ The general form of the logistic regression model is a sigmoid function, which r
 * X = the inputs values (measurements of parts of the iris, in this case)
 * y = the classification of each iris’s species
 * θ = theta, representing an array of weights for each classification
+
+> **Calculation Notes:**
+
+The first term is the bias term, and the value of x1 in this term is actually "1." Written in its long form, term-by-term, the equation for *z* could be written without *x1*. However, adding a column of ones to the 2D array/matrix X makes the implementation nicer in Numpy. 
+
+> I kept the superscript T (meaning transpose) in the equation for purposes of correct notation. However, the intention is for each individual X value to be multiplied by its corresponding θ coefficient for all rows of data. During Numpy implementation, I found it simpler to reverse the order of the terms and instead do matrix multiplication of X ** θ.
 
 It is worth noting that, while θ is referred to here as model “weights,” it functions similarly to coefficients used in algebra. Notation differs sometimes, but the general idea is that X represents multiple x-values of the data collected. The θ values are being optimized to produce the smallest amount of error when X values are input into the trained model. 
 
