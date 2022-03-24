@@ -37,7 +37,6 @@ plugins:
 - jemoji
 - jekyll-data
 - jekyll-remote-theme
-- 
 exclude:
 - drafts
 - - node_modules
@@ -46,3 +45,4 @@ exclude:
   - yarn.lock
 paginate: 8
 paginate_path: "/page/:num"
+excerpt_separator: <!--more-->
